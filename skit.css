@@ -1,16 +1,111 @@
 :root {
-  --pri: #303088;
-  --sec: #1d741d;
-  --white: #ffffff;
-  --dark: #080808;
-  --danger: #9c2a2a;
+  --border: 1px;
+  --pd: 10px;
+  --rd: 0;
+  --font-size: 14px;
+  --fild-h: 36px;
 }
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   box-sizing: border-box;
 }
 
+body {
+  background-color: var(--background);
+}
+
+/*BUTTONS*/
 button {
   all: unset;
+}
+
+button, .btn {
+  font-weight: 600;
+  border: var(--border) solid var(--foreground);
+  background-color: var(--background);
+  color: var(--foreground);
+  border-radius: var(--rd) var(--rd) var(--rd) var(--rd);
+  font-size: var(--font-size);
+  height: calc(var(--fild-h) - var(--border) * 2);
+  padding: 0 calc(var(--pd) * 2);
+  cursor: pointer;
+}
+
+.btn-pri {
+  background-color: var(--pri);
+  color: var(--white);
+  border: var(--border) solid var(--pri);
+}
+.btn-pri:hover {
+  border: var(--border) solid var(--white);
+}
+
+.btn-sec {
+  background-color: var(--sec);
+  color: var(--white);
+  border: var(--border) solid var(--sec);
+}
+.btn-sec:hover {
+  border: var(--border) solid var(--white);
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  color: var(--white);
+  border: var(--border) solid var(--danger);
+}
+.btn-danger:hover {
+  border: var(--border) solid var(--white);
+}
+
+.sk-tabs {
+  display: block;
+  width: 100%;
+  background-color: var(--pri);
+}
+
+.sk-tabs-btns {
+  display: flex;
+  padding-left: 1px;
+  padding-top: 2px;
+}
+.sk-tabs-btns div {
+  border-bottom: 3px solid var(--dark);
+}
+.sk-tabs-btns button {
+  border: none !important;
+  background-color: var(--dark);
+  color: var(--white);
+  height: var(--fild-h);
+}
+.sk-tabs-btns .active {
+  border-bottom: 3px solid var(--sec);
+}
+
+.sk-tabs-area {
+  position: relative;
+  display: block;
+  width: 100%;
+  background-color: var(--dark1);
+  border: 1px solid var(--pri);
+  border-top: none;
+}
+.sk-tabs-area .active {
+  display: block;
+  z-index: 1;
+}
+.sk-tabs-area .inactive {
+  display: block;
+  position: absolute;
+  opacity: 0;
+  left: 0px;
+  top: 0px;
+  height: 1px;
+  width: 1px;
+  z-index: 0;
+  overflow: auto;
+  pointer-events: none;
 }

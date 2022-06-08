@@ -1,0 +1,43 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+}
+
+:root {
+  --pri: #303088;
+  --sec: #1d741d;
+  --white: #ffffff;
+  --dark: #080808;
+  --danger: #9c2a2a;
+  --foreground: var(--dark);
+  --background: var(--white);
+}
+
+/* DARK MODE */
+.DarkMode {
+  --pri: #303088;
+  --sec: #1d741d;
+  --white: #080808;
+  --dark: #ffffff;
+  --danger: #9c2a2a;
+  --foreground: var(--white);
+  --background: var(--dark);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pri: #303088;
+    --sec: #1d741d;
+    --white: #080808;
+    --dark: #ffffff;
+    --danger: #9c2a2a;
+    --foreground: var(--white);
+    --background: var(--dark);
+  }
+}
