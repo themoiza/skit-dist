@@ -61,6 +61,33 @@ button, .btn {
   border: var(--border) solid var(--white);
 }
 
+.table-wrapper {
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--foreground);
+  color: var(--background);
+}
+table thead {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+table thead th {
+  padding: 10px 10px;
+}
+table tbody {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+table tbody td {
+  padding: 5px 10px;
+}
+
 .sk-tabs {
   display: block;
   width: 100%;
@@ -108,4 +135,16 @@ button, .btn {
   z-index: 0;
   overflow: auto;
   pointer-events: none;
+}
+
+.tx-left {
+  text-align: left;
+}
+
+.tx-right {
+  text-align: right;
+}
+
+.tx-center {
+  text-align: center;
 }
