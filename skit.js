@@ -1,3 +1,96 @@
+window.Confirm = function(obj){
+
+	if(obj.message && obj.ok){
+
+		var mask = `
+			<div class="Confirm no-select">
+				<div class="Confirm-title">`+obj.title+`</div>
+				<div class="Confirm-message">`+obj.message+`</div>
+				<div class="Confirm-buttons">
+					<button id="Confirm-ok" class="`+obj.okclass+`">`+obj.ok+`</button>
+				</div>
+			</div>`;
+
+		if(obj.no !== false){
+
+			mask = `
+				<div class="Confirm no-select">
+				<div class="Confirm-title">`+obj.title+`</div>
+				<div class="Confirm-message">`+obj.message+`</div>
+					<div class="Confirm-buttons">
+					<button id="Confirm-ok" class="`+obj.okclass+`">`+obj.ok+`</button>
+						<button id="Confirm-no" class="`+obj.noclass+`">`+obj.no+`</button> 
+					</div>
+				</div>`;
+		}
+
+		if(document.getElementById('Confirm')){
+			var div = document.getElementById('Confirm');
+			div.innerHTML = mask;
+		}else{
+			var div = document.createElement('div');
+			div.setAttribute('id', 'Confirm');
+			div.innerHTML = mask;
+			document.body.appendChild(div);
+		}
+
+		div.classList.remove('hidden');
+
+		if(document.getElementById('Confirm-ok')){
+			document.getElementById('Confirm-ok').focus();
+		}
+
+		div.addEventListener('click', (e) => {
+
+			if(div === e.target){
+
+				div.classList.add('hidden');
+
+				if(obj.cancelFn){
+					obj.cancelFn();
+				}
+			}
+		});
+
+		document.getElementById('Confirm-ok').addEventListener('click', (e) => {
+
+			div.classList.add('hidden');
+
+			if(obj.okFn){
+				obj.okFn();
+			}
+		});
+
+		document.getElementById('Confirm-ok').addEventListener('keyup', (e) => {
+
+			if(e.keyCode == 13){
+
+				div.classList.add('hidden');
+
+				if(obj.okFn){
+					obj.okFn();
+				}
+			}
+		});
+
+		document.getElementById('Confirm-no').addEventListener('click', (e) => {
+
+			div.classList.add('hidden');
+
+			if(obj.noFn){
+				obj.noFn();
+			}
+		});
+
+		document.getElementById('Confirm-no').addEventListener('keyup', (e) => {
+
+			if(e.keyCode == 13){
+				div.classList.add('hidden');
+				obj.noFn();
+			}
+		});
+	}
+};
 
 class Tabs{
 
@@ -72,33 +165,5 @@ class Tabs{
 				}
 			}
 		}
-	}
-
-	removeTab(index){
-
-		// UPDATE
-		this.buttons = this.tabHeader.querySelectorAll('button[data-index]');
-
-		for(var b = 0; b < this.buttons.length; b++){
-
-			if(Number(index) === Number(this.buttons[b].getAttribute('data-index'))){
-
-				this.buttons[b].parentElement.removeChild(this.buttons[b]);
-			}
-		}
-
-		// UPDATE
-		this.buttons = this.tabHeader.querySelectorAll('button[data-index]');
-
-		// GO TO FISRT TAB
-		this.setTab();
-	}
-
-	addTab(tabNew){
-
-	}
-
-	init(config){
-
 	}
 }
