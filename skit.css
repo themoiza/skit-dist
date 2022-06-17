@@ -1,7 +1,7 @@
 :root {
   --border: 1px;
   --pd: 10px;
-  --rd: 0;
+  --rd: 0px;
   --font-size: 14px;
   --fild-h: 36px;
 }
@@ -14,7 +14,7 @@
 }
 
 body {
-  background-color: var(--background);
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
 }
 
 .hidden {
@@ -36,6 +36,15 @@ body {
   -o-user-select: none;
 }
 
+input {
+  accent-color: hsl(var(--light-hue), var(--light-sat), 90%);
+}
+
+input[type=radio],
+input[type=checkbox] {
+  transform: scale(1.2);
+}
+
 /*BUTTONS*/
 button {
   all: unset;
@@ -43,52 +52,86 @@ button {
 
 button, .btn {
   font-weight: 600;
-  border: var(--border) solid var(--foreground);
-  background-color: var(--background);
-  color: var(--foreground);
+  border: var(--border) solid hsl(var(--background-hue), var(--background-sat), calc(var(--background-lig) + 10%));
+  background-color: hsl(var(--background-hue), var(--background-sat), calc(var(--background-lig) + 10%));
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   border-radius: var(--rd) var(--rd) var(--rd) var(--rd);
-  font-size: var(--font-size);
+  font-size: calc(var(--font-size) - 2px);
+  min-width: 60px;
   text-align: center;
   height: calc(var(--fild-h) - var(--border) * 2);
-  padding: 0 calc(var(--pd) * 2);
+  padding: 0 var(--pd);
   cursor: pointer;
 }
 
+.btn-med {
+  font-size: calc(var(--font-size) * 1.15);
+  height: calc((var(--fild-h) - var(--border)) * 1.25);
+  padding: 0 calc(var(--pd) * 2);
+}
+
 .btn-pri {
-  background-color: var(--pri);
-  color: var(--white);
-  border: var(--border) solid var(--pri);
+  background-color: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
+  border: var(--border) solid hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
+  color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
 }
 .btn-pri:hover {
-  border: var(--border) solid var(--white);
+  background-color: hsl(var(--pri-hue), var(--pri-sat), calc(var(--pri-lig) - 2%));
+  border-color: hsl(var(--pri-hue), var(--pri-sat), calc(var(--pri-lig) - 2%));
+}
+.btn-pri:focus {
+  background-color: hsl(var(--pri-hue), var(--pri-sat), calc(var(--pri-lig) - 5%));
+  border-color: hsl(var(--pri-hue), var(--pri-sat), calc(var(--pri-lig) - 5%));
+}
+.btn-pri:active {
+  background-color: hsl(var(--pri-hue), var(--pri-sat), calc(var(--pri-lig) - 8%));
+  border-color: hsl(var(--pri-hue), var(--pri-sat), calc(var(--pri-lig) - 8%));
 }
 
 .btn-sec {
-  background-color: var(--sec);
-  color: var(--white);
-  border: var(--border) solid var(--sec);
+  background-color: hsl(var(--sec-hue), var(--sec-sat), var(--sec-lig));
+  border: var(--border) solid hsl(var(--sec-hue), var(--sec-sat), var(--sec-lig));
+  color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
 }
 .btn-sec:hover {
-  border: var(--border) solid var(--white);
+  background-color: hsl(var(--sec-hue), var(--sec-sat), calc(var(--sec-lig) - 2%));
+  border-color: hsl(var(--sec-hue), var(--sec-sat), calc(var(--sec-lig) - 2%));
+}
+.btn-sec:focus {
+  background-color: hsl(var(--sec-hue), var(--sec-sat), calc(var(--sec-lig) - 5%));
+  border-color: hsl(var(--sec-hue), var(--sec-sat), calc(var(--sec-lig) - 5%));
+}
+.btn-sec:active {
+  background-color: hsl(var(--sec-hue), var(--sec-sat), calc(var(--sec-lig) - 8%));
+  border-color: hsl(var(--sec-hue), var(--sec-sat), calc(var(--sec-lig) - 8%));
 }
 
 .btn-danger {
-  background-color: var(--danger);
-  color: var(--white);
-  border: var(--border) solid var(--danger);
+  background-color: hsl(var(--danger-hue), var(--danger-sat), var(--danger-lig));
+  border: var(--border) solid hsl(var(--danger-hue), var(--danger-sat), var(--danger-lig));
+  color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
 }
 .btn-danger:hover {
-  border: var(--border) solid var(--white);
+  background-color: hsl(var(--danger-hue), var(--danger-sat), calc(var(--danger-lig) - 2%));
+  border-color: hsl(var(--danger-hue), var(--danger-sat), calc(var(--danger-lig) - 2%));
+}
+.btn-danger:focus {
+  background-color: hsl(var(--danger-hue), var(--danger-sat), calc(var(--danger-lig) - 5%));
+  border-color: hsl(var(--danger-hue), var(--danger-sat), calc(var(--danger-lig) - 5%));
+}
+.btn-danger:active {
+  background-color: hsl(var(--danger-hue), var(--danger-sat), calc(var(--danger-lig) - 8%));
+  border-color: hsl(var(--danger-hue), var(--danger-sat), calc(var(--danger-lig) - 8%));
 }
 
 .card {
-  background-color: var(--background);
+  background-color: hsl(var(--background-hue), var(--background-sat), calc(var(--background-lig) + 1%));
   display: block;
   width: 100%;
   box-sizing: border-box;
 }
 .card .title {
-  color: var(--foreground);
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   font-weight: bold;
   font-size: 16px;
 }
@@ -106,8 +149,8 @@ button, .btn {
 }
 #Confirm .Confirm {
   display: block;
-  color: var(--background);
-  background-color: var(--foreground);
+  color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+  background-color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   margin: auto;
   width: calc(100vw - 60px);
   max-width: 480px;
@@ -117,21 +160,27 @@ button, .btn {
   padding: 40px 20px;
 }
 #Confirm .Confirm .Confirm-title {
-  font-size: 30px;
+  font-size: calc(var(--font-size) * 1.5);
   margin-bottom: 20px;
   font-weight: 600;
   line-height: 34px;
   text-align: center;
 }
 #Confirm .Confirm .Confirm-message {
-  font-size: 18px;
+  font-size: var(--font-size);
   margin-bottom: 20px;
   font-weight: 300;
   line-height: 20px;
   text-align: center;
 }
-#Confirm .Confirm .Confirm-buttons {
+#Confirm .Confirm .Confirm-actions {
   text-align: center;
+}
+
+.field {
+  display: flex;
+  height: var(--fild-h);
+  place-items: center;
 }
 
 .grid {
@@ -3919,28 +3968,30 @@ button, .btn {
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: var(--foreground);
-  color: var(--background);
+  --dark-lig: 20%;
 }
 table thead {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: hsl(var(--dark-hue), var(--dark-sat), calc(var(--dark-lig) - 1%));
+  color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
 }
 table thead th {
   padding: 10px 10px;
 }
-table tbody {
-  background-color: var(--background);
-  color: var(--foreground);
+table tbody tr:nth-child(even) {
+  background-color: hsl(var(--background-hue), var(--background-sat), calc(var(--background-lig) - 1%));
+}
+table tbody tr:nth-child(odd) {
+  background-color: hsl(var(--background-hue), var(--background-sat), calc(var(--background-lig) + 1%));
 }
 table tbody td {
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   padding: 5px 10px;
 }
 
 .sk-tabs {
   display: block;
   width: 100%;
-  background-color: var(--pri);
+  background-color: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
 }
 
 .sk-tabs-btns {
@@ -3949,24 +4000,30 @@ table tbody td {
   padding-top: 2px;
 }
 .sk-tabs-btns div {
-  border-bottom: 3px solid var(--dark);
+  border-bottom: 3px solid hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
 }
 .sk-tabs-btns button {
   border: none !important;
-  background-color: var(--dark);
-  color: var(--white);
+  background-color: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
+  color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
   height: var(--fild-h);
 }
+.sk-tabs-btns button:hover {
+  background-color: hsl(var(--pri-hue), var(--pri-sat), calc(var(--pri-lig) - 3%));
+}
 .sk-tabs-btns .active {
-  border-bottom: 3px solid var(--sec);
+  border-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
+}
+.sk-tabs-btns .active button {
+  background-color: hsl(var(--pri-hue), var(--pri-sat), calc(var(--pri-lig) - 6%));
 }
 
 .sk-tabs-area {
   position: relative;
   display: block;
   width: 100%;
-  background-color: var(--dark1);
-  border: 1px solid var(--pri);
+  background-color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
+  border: 1px solid hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
   border-top: none;
 }
 .sk-tabs-area .active {
