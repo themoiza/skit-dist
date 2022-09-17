@@ -190,27 +190,27 @@ button, .btn {
 /*
 <input type="button">
 <input type="checkbox">
-<input type="color">
-<input type="date">
-<input type="datetime-local">
+<input type="color"> ✅
+<input type="date"> ✅
+<input type="datetime-local"> ✅
 <input type="email"> ✅
-<input type="file">
-<input type="hidden">
-<input type="image">
-<input type="month">
+<input type="file"> ✅
+
+<input type="image"> 
+<input type="month">✅
 <input type="number"> ✅
-<input type="password">
+<input type="password"> ✅
 <input type="radio">
-<input type="range">
+<input type="range"> ✅
 <input type="reset">
-<input type="search">
+<input type="search"> ✅
 <input type="submit">
 
 <input type="tel"> ✅
 <input type="text"> ✅
-<input type="time">
-<input type="url">
-<input type="week">
+<input type="time"> ✅
+<input type="url"> ✅
+<input type="week"> ✅
 */
 .field {
   display: inline-block;
@@ -225,21 +225,24 @@ button, .btn {
   font-weight: bold;
   font-size: var(--font-size);
 }
-.field input[type=email], .field input[type=password], .field input[type=number], .field input[type=text], .field input[type=tel], .field select {
+.field input[type=color], .field input[type=date], .field input[type=datetime-local], .field input[type=month], .field input[type=email], .field input[type=file], .field input[type=password], .field input[type=range], .field input[type=search], .field input[type=time], .field input[type=url], .field input[type=week], .field input[type=number], .field input[type=text], .field input[type=tel], .field select {
+  border: none;
+  padding: 0 var(--pd);
   font-family: var(--font-family);
   color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
   background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
   border-radius: var(--rd);
   width: 100%;
   height: var(--fild-h);
+  min-width: 1rem;
   outline-width: 1px;
-  outline-color: hsl(var(--light-hue), var(--light-sat), calc(var(--light-lig) - 30%));
+  outline-color: hsl(var(--light-hue), var(--light-sat), calc(var(--foreground-lig) + 50%));
   outline-style: solid;
 }
 .field textarea {
   font-family: var(--font-family);
   color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
-  background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
+  background-color: hsl(var(--light-hue), var(--light-sat), calc(var(--light-lig) + 10%));
   border-radius: var(--rd);
   width: 100%;
   border: none;
@@ -251,20 +254,49 @@ button, .btn {
   outline-color: hsl(var(--light-hue), var(--light-sat), calc(var(--light-lig) - 30%));
   outline-style: solid;
 }
-.field input[type=email], .field input[type=password], .field input[type=number], .field input[type=text], .field input[type=tel] {
+.field input[type=color] {
+  cursor: pointer;
+  padding: 0;
+}
+.field input[type=color]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+.field input[type=color]::-webkit-color-swatch {
   border: none;
-  padding: 0 var(--pd);
-  box-sizing: border-box;
-  color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
+}
+.field input[type=file] {
+  position: relative;
+  line-height: var(--fild-h);
+}
+.field input[type=file]::-webkit-file-upload-button, .field input[type=file]::file-selector-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  border: none;
+  height: inherit;
+  width: inherit;
+  z-index: 1;
+}
+.field input[type=number] {
+  text-align: right;
+}
+.field input[type=range] {
+  outline: none;
+  padding: 0;
 }
 .field input::placeholder, .field textarea::placeholder {
   opacity: 0.5;
   color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
 }
-.field input:focus, .field textarea:focus {
+.field input:focus, .field select:focus, .field textarea:focus {
   outline-width: 2px;
   outline-color: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
   outline-style: solid;
+}
+.field input[type=range]:focus {
+  outline: none;
+  padding: 0;
 }
 .field input:invalid, .field textarea:invalid {
   background-color: hsl(var(--danger-hue), var(--danger-sat), calc(var(--danger-lig) + 25%)) !important;
@@ -278,17 +310,11 @@ button, .btn {
   right: 5px;
   color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
 }
-.field select {
-  border: none;
-  outline: none;
-  padding: 0 var(--pd);
-  box-sizing: border-box;
-}
 
 .grid {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
 }
 
 .vcenter {
@@ -306,51 +332,51 @@ button, .btn {
 }
 
 .col-1 {
-  width: 8.3333%;
+  grid-column: span 1;
 }
 
 .col-2 {
-  width: 16.6666%;
+  grid-column: span 2;
 }
 
 .col-3 {
-  width: 25%;
+  grid-column: span 3;
 }
 
 .col-4 {
-  width: 33.3333%;
+  grid-column: span 4;
 }
 
 .col-5 {
-  width: 41.6666%;
+  grid-column: span 5;
 }
 
 .col-6 {
-  width: 50%;
+  grid-column: span 6;
 }
 
 .col-7 {
-  width: 58.3333%;
+  grid-column: span 7;
 }
 
 .col-8 {
-  width: 66.6666%;
+  grid-column: span 8;
 }
 
 .col-9 {
-  width: 75%;
+  grid-column: span 9;
 }
 
 .col-10 {
-  width: 83.3333%;
+  grid-column: span 10;
 }
 
 .col-11 {
-  width: 91.6666%;
+  grid-column: span 11;
 }
 
 .col-11 {
-  width: 100%;
+  grid-column: span 12;
 }
 
 .col-5px {
