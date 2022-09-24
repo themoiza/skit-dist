@@ -20,7 +20,7 @@
 }
 
 body {
-  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+  background-color: hsl(var(--background-hue), var(--background-sat), calc(var(--background-lig) - 3%));
 }
 
 .hidden {
@@ -62,6 +62,7 @@ button, .btn {
   box-sizing: border-box;
   vertical-align: middle;
   cursor: pointer;
+  margin-bottom: 0.2rem;
 }
 button i, .btn i {
   font-style: normal !important;
@@ -8032,8 +8033,7 @@ button i, .btn i {
   outline-color: hsl(var(--light-hue), var(--light-sat), calc(var(--light-lig) - 30%));
   outline-style: solid;
 }
-.field input[type=radio],
-.field input[type=checkbox] {
+.field input[type=radio], .field input[type=checkbox] {
   appearance: none;
   cursor: pointer;
   border: none;
@@ -8042,8 +8042,7 @@ button i, .btn i {
   vertical-align: middle;
   position: relative;
 }
-.field input[type=radio]::before,
-.field input[type=checkbox]::before {
+.field input[type=radio]::before, .field input[type=checkbox]::before {
   color: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
   position: absolute;
   top: 0;
@@ -8064,13 +8063,7 @@ button i, .btn i {
 .field input[type=checkbox]:checked::before {
   content: "▣";
 }
-.field input[type=radio]:disabled,
-.field input[type=checkbox]:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-.field input[type=radio] + label,
-.field input[type=checkbox] + label {
+.field input[type=radio] + label, .field input[type=checkbox] + label {
   display: inline-block;
   vertical-align: middle;
   font-weight: bold;
@@ -8084,11 +8077,6 @@ button i, .btn i {
   -moz-user-select: none;
   -ms-user-select: none;
   -o-user-select: none;
-}
-.field input[type=radio]:disabled + label,
-.field input[type=checkbox]:disabled + label {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 .field input[type=color] {
   cursor: pointer;
@@ -8197,6 +8185,11 @@ button i, .btn i {
   border-radius: calc(var(--field-h) / 1.5);
   background: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
 }
+.field input[type=color]:disabled, .field input[type=date]:disabled, .field input[type=datetime-local]:disabled, .field input[type=month]:disabled, .field input[type=email]:disabled, .field input[type=file]:disabled, .field input[type=password]:disabled, .field input[type=search]:disabled, .field input[type=time]:disabled, .field input[type=url]:disabled, .field input[type=week]:disabled, .field input[type=number]:disabled, .field input[type=text]:disabled, .field input[type=tel]:disabled, .field select:disabled, .field textarea:disabled, .field input[type=radio]:disabled, .field input[type=checkbox]:disabled, .field input[type=range]:disabled, .field input[type=radio]:disabled + label, .field input[type=checkbox]:disabled + label {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
 
 .toggle {
   position: relative;
@@ -8244,6 +8237,12 @@ button i, .btn i {
 }
 .toggle input[type=checkbox] + label {
   margin-left: 3rem;
+}
+
+.disabled .label {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
 }
 
 .grid {
@@ -8562,10 +8561,11 @@ button i, .btn i {
   background-color: hsl(var(--dark-hue), var(--dark-sat), calc(var(--dark-lig) - 1%));
   color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
   width: 100%;
-  padding: 20px 0px;
+  padding: 1.5rem 0;
   box-sizing: border-box;
   text-transform: uppercase;
   font-weight: bold;
+  font-size: 0.9rem;
 }
 
 table {
@@ -8578,8 +8578,9 @@ table thead {
   color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
 }
 table thead th {
-  padding: 10px 10px;
+  padding: 0.5rem 0.75rem;
   font-weight: bold;
+  font-size: 0.9rem;
 }
 table tbody tr:nth-child(even) {
   background-color: hsl(var(--background-hue), var(--background-sat), calc(var(--background-lig) - 1%));
@@ -8589,7 +8590,8 @@ table tbody tr:nth-child(odd) {
 }
 table tbody td {
   color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
-  padding: 5px 10px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
 }
 
 .sk-tabs {
@@ -8611,6 +8613,7 @@ table tbody td {
   background-color: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
   color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
   height: var(--field-h);
+  font-size: 0.8rem;
 }
 .sk-tabs-btns button:hover {
   background-color: hsl(var(--pri-hue), var(--pri-sat), calc(var(--pri-lig) - 3%));
@@ -8645,6 +8648,77 @@ table tbody td {
   z-index: 0;
   overflow: auto;
   pointer-events: none;
+}
+
+/* TOOLTIP */
+.tooltip {
+  display: block;
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+  background-color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+  max-width: 20rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  transform: scale(0.01);
+  opacity: 0;
+  box-sizing: border-box;
+  border-radius: var(--rd);
+  transition: transform 0.15s ease-in-out, opacity 0.15s ease-in-out;
+}
+
+.tooltip::after {
+  --triangle-size: 0.75rem;
+  content: "";
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  z-index: 5;
+  transform: translate(calc(var(--triangle-size) * -1), calc(var(--triangle-size) - 1px));
+  border-style: solid;
+  border-width: var(--triangle-size) var(--triangle-size) 0 var(--triangle-size);
+  border-color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig)) transparent transparent transparent;
+}
+
+.tooltip-top::after {
+  left: 50%;
+  bottom: 0;
+  transform: translate(calc(var(--triangle-size) * -1), calc(var(--triangle-size) - 1px));
+  border-width: var(--triangle-size) var(--triangle-size) 0 var(--triangle-size);
+  border-color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig)) transparent transparent transparent;
+}
+
+.tooltip-bottom::after {
+  left: 50%;
+  top: 0;
+  transform: translate(calc(var(--triangle-size) * -1), calc(var(--triangle-size) * -1));
+  border-width: 0 var(--triangle-size) var(--triangle-size) var(--triangle-size);
+  border-color: transparent transparent hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig)) transparent;
+}
+
+.tooltip-left::after {
+  right: 0;
+  top: 50%;
+  transform: translate(calc(var(--triangle-size) * 1), calc(var(--triangle-size) * -1));
+  border-width: var(--triangle-size) 0 var(--triangle-size) var(--triangle-size);
+  border-color: transparent transparent transparent hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+}
+
+.tooltip-right::after {
+  left: 0;
+  top: 50%;
+  transform: translate(calc(var(--triangle-size) * -1), calc(var(--triangle-size) * -1));
+  border-width: var(--triangle-size) var(--triangle-size) var(--triangle-size) 0;
+  border-color: transparent hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig)) transparent transparent;
+}
+
+.tooltip-active {
+  transform: scale(1);
+  z-index: 5;
+  opacity: 1;
+  transition: transform 0.15s ease-in-out, opacity 0.15s ease-in-out;
 }
 
 .tx-left {
