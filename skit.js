@@ -23,7 +23,7 @@ window.Confirm = function(obj){
 					<div class="Confirm-title">`+obj.title+`</div>
 					`+message+`
 					<div class="Confirm-actions">
-						<button id="Confirm-ok" class="`+obj.okclass+`">`+obj.ok+`</button><button id="Confirm-no" class="`+obj.noclass+`">`+obj.no+`</button> 
+						<button id="Confirm-ok" class="`+obj.okclass+`">`+obj.ok+`</button> <button id="Confirm-no" class="`+obj.noclass+`">`+obj.no+`</button> 
 					</div>
 				</div>`;
 		}
@@ -116,6 +116,84 @@ window.Copy = (id) => {
 		window.setTimeout(() => {
 			tx.parentNode.removeChild(tx);
 		}, 10);
+	}
+};
+window.Debounce = (function(fn, ms, id){
+
+	if(typeof(debounceInstance) === 'undefined'){
+		window.debounceInstance = {};
+	}
+
+	return function(fn, ms, id){
+
+		clearTimeout(debounceInstance[id]);
+		debounceInstance[id] = setTimeout(fn, ms);
+	};
+}());
+
+/* USAGE
+
+Debounce(() => {
+
+}, 1000, id);
+*/
+window.Dialog = {
+
+	open: (obj) => {
+
+		obj.html = obj.html.split('{{dialogs}}').join('');
+
+		if(!document.getElementById('boss-dialog')){
+			var dialog = document.createElement('div');
+			dialog.setAttribute('id', 'boss-dialog');
+
+			var area = document.createElement('div');
+			area.classList.add('boss-dialog-area');
+			area.innerHTML = obj.html;
+
+			dialog.appendChild(area);
+			document.body.appendChild(dialog);
+
+		}else{
+
+			var dialog = document.getElementById('boss-dialog');
+			dialog.classList.remove('hidden');
+			dialog.innerHTML = '';
+
+			var area = document.createElement('div');
+			area.classList.add('boss-dialog-area');
+			area.innerHTML = obj.html;
+
+			if(obj.close){
+				area.appendChild(c);
+			}
+
+			dialog.appendChild(area);
+
+		}
+
+		if(obj.invisible){
+			area.classList.add('boss-dialog-invisible');
+		}
+
+		Boss.evts.add(Boss.evtTouchUp(), document.getElementById('boss-dialog-close'), function(evts){
+
+			Boss.dialog.close();
+
+			if(obj.callBack && typeof(obj.callBack) === 'function'){
+				obj.callBack();
+			}
+		});
+	},
+	close: function(){
+
+		if(document.getElementById('boss-dialog')){
+
+			var dialog = document.getElementById('boss-dialog');
+			dialog.classList.add('hidden');
+			dialog.innerHTML = '';
+
+		}
 	}
 };
 
@@ -220,14 +298,14 @@ window.Tooltip = {
 
 			if(typeof(e.target.getAttribute('data-title-for')) !== 'string'){
 
-				var randomID = 'tip'+(Math.random()*1000000).toFixed(0);
+				var randomId = 'tip'+(Math.random()*1000000).toFixed(0);
 
 				var div = document.createElement('div');
 				div.classList.add('tooltip');
-				div.setAttribute('id', randomID);
+				div.setAttribute('id', randomId);
 				div.textContent = e.target.getAttribute('data-title');
 
-				e.target.setAttribute('data-title-for', randomID);
+				e.target.setAttribute('data-title-for', randomId);
 				e.target.parentElement.appendChild(div);
 			}
 		}
@@ -334,3 +412,137 @@ document.addEventListener('mousemove', (e) => {
 window.addEventListener('scroll', (e) => {
 	Tooltip.handle(e);
 });
+window.Warning = {
+
+	show: function(obj){
+
+		if(obj.title){
+
+			var color = '';
+			if(obj.color){
+
+				if(obj.color == 'danger'){
+					color = 'Warning-danger';
+				}
+
+				if(obj.color == 'pri'){
+					color = 'Warning-pri';
+				}
+
+				if(obj.color == 'sec'){
+					color = 'Warning-sec';
+				}
+
+				if(obj.color == 'dark'){
+					color = 'Warning-dark';
+				}
+
+				if(obj.color == 'light'){
+					color = 'Warning-light';
+				}
+			}
+
+			var warn;
+			var warningDelay = 8000;
+			var id = 'warning';
+
+			if(obj.timeout){
+				warningDelay = obj.timeout;
+			}
+
+			var mask = `<div style="animation-duration: `+warningDelay+`ms" class="Warning `+color+`" data-id="{{id}}">
+					<div>
+						<div class="title">`+obj.title+`</div>
+						<div>`+obj.message+`</div>
+					</div>
+					<div><button class="Warning-close">⨉</button></div>
+				</div>`;
+
+			if(obj.id){
+				id = obj.id.replace('"', '');
+			}
+
+			mask = mask.split('{{id}}').join(id);
+
+			if(document.getElementById('Warning')){
+
+				warn = document.getElementById('Warning');
+
+			}else{
+
+				warn = document.createElement('div');
+				warn.setAttribute('id', 'Warning');
+				document.body.appendChild(warn);
+
+				warn.addEventListener('click', (e) => {
+
+					var el = e.target;
+					if(e.target.nodeName == 'I'){
+						el = el.parentElement;
+					}
+
+					if(el.nodeName == 'BUTTON'){
+
+						var warnline = el.parentElement.parentElement;
+
+						var parent = warnline.parentElement;
+						parent.removeChild(warnline);
+					}
+
+				}, true);
+			}
+
+			/* REMOVE EMPTY CANVAS */
+			var removes = warn.querySelectorAll('.Warning-canvas');
+			removes.forEach(function(el){
+
+				if(el.innerHTML == ''){
+					var parent = el.parentElement;
+					parent.removeChild(el);
+				}
+			});
+
+			var warnline = warn.querySelector('div[data-id="'+id+'"]');
+
+			var tcanvas = warn.querySelectorAll('div[data-id]');
+
+			if(!warnline){
+
+				// LIMIT OF WARNS
+				if(tcanvas.length < 5){
+
+					var warnline = document.createElement('div');
+					warnline.setAttribute('class', 'Warning-canvas');
+					warnline.innerHTML = mask;
+
+					warn.appendChild(warnline);
+
+					Debounce(() => {
+
+						if(typeof(warnline) !== 'undefined' && typeof(warnline.parentElement) !== 'undefined'){
+
+							try{
+
+								warnline.parentElement.removeChild(warnline);
+							}catch{
+
+							}
+						}
+					}, warningDelay, id);
+				}
+
+			/* UPDATE WARNING */
+			}else if(warnline){
+
+				warnline.setAttribute('class', `Warning `+color);
+
+				warnline.innerHTML = `
+					<div>
+						<div class="title">`+obj.title+`</div>
+						<div>`+obj.message+`</div>
+					</div>
+					<div><button class="Warning-close">⨉</button></div>`;
+			}
+		}
+	}
+};
