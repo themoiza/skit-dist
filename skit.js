@@ -11,9 +11,9 @@ window.Confirm = function(obj){
 			<div class="Confirm no-select">
 				<div class="Confirm-title">`+obj.title+`</div>
 				`+message+`
-				<div class="Confirm-actions">
-					<button id="Confirm-ok" class="`+obj.okclass+`">`+obj.ok+`</button>
-				</div>
+			</div>
+			<div class="Confirm-actions">
+				<button id="Confirm-ok" class="`+obj.okclass+`">`+obj.ok+`</button>
 			</div>`;
 
 		if(obj.no !== false){
@@ -22,9 +22,9 @@ window.Confirm = function(obj){
 				<div class="Confirm no-select">
 					<div class="Confirm-title">`+obj.title+`</div>
 					`+message+`
-					<div class="Confirm-actions">
-						<button id="Confirm-ok" class="`+obj.okclass+`">`+obj.ok+`</button> <button id="Confirm-no" class="`+obj.noclass+`">`+obj.no+`</button> 
-					</div>
+				</div>
+				<div class="Confirm-actions">
+					<button id="Confirm-ok" class="`+obj.okclass+`">`+obj.ok+`</button> <button id="Confirm-no" class="`+obj.noclass+`">`+obj.no+`</button> 
 				</div>`;
 		}
 
@@ -32,13 +32,14 @@ window.Confirm = function(obj){
 			var div = document.getElementById('Confirm');
 			div.innerHTML = mask;
 		}else{
-			var div = document.createElement('div');
+			var div = document.createElement('dialog');
 			div.setAttribute('id', 'Confirm');
 			div.innerHTML = mask;
 			document.body.appendChild(div);
 		}
 
-		div.classList.remove('hidden');
+		document.getElementById('Confirm').showModal();
+		document.body.classList.add('No-scroll');
 
 		if(document.getElementById('Confirm-ok')){
 			document.getElementById('Confirm-ok').focus();
@@ -48,7 +49,8 @@ window.Confirm = function(obj){
 
 			if(div === e.target){
 
-				div.classList.add('hidden');
+				document.getElementById('Confirm').close();
+				document.body.classList.remove('No-scroll');
 
 				if(obj.cancelFn){
 					obj.cancelFn();
@@ -58,7 +60,8 @@ window.Confirm = function(obj){
 
 		document.getElementById('Confirm-ok').addEventListener('click', (e) => {
 
-			div.classList.add('hidden');
+			document.getElementById('Confirm').close();
+			document.body.classList.remove('No-scroll');
 
 			if(obj.okFn){
 				obj.okFn();
@@ -69,7 +72,8 @@ window.Confirm = function(obj){
 
 			if(e.keyCode == 13){
 
-				div.classList.add('hidden');
+				document.getElementById('Confirm').close();
+				document.body.classList.remove('No-scroll');
 
 				if(obj.okFn){
 					obj.okFn();
@@ -79,7 +83,8 @@ window.Confirm = function(obj){
 
 		document.getElementById('Confirm-no').addEventListener('click', (e) => {
 
-			div.classList.add('hidden');
+			document.getElementById('Confirm').close();
+			document.body.classList.remove('No-scroll');
 
 			if(obj.noFn){
 				obj.noFn();
@@ -89,7 +94,9 @@ window.Confirm = function(obj){
 		document.getElementById('Confirm-no').addEventListener('keyup', (e) => {
 
 			if(e.keyCode == 13){
-				div.classList.add('hidden');
+
+				document.getElementById('Confirm').close();
+				document.body.classList.remove('No-scroll');
 				obj.noFn();
 			}
 		});
@@ -143,12 +150,13 @@ window.Dialog = {
 
 		obj.html = obj.html.split('{{dialogs}}').join('');
 
-		if(!document.getElementById('boss-dialog')){
+		if(!document.getElementById('dialog')){
+
 			var dialog = document.createElement('div');
-			dialog.setAttribute('id', 'boss-dialog');
+			dialog.setAttribute('id', 'dialog');
 
 			var area = document.createElement('div');
-			area.classList.add('boss-dialog-area');
+			area.classList.add('dialog-area');
 			area.innerHTML = obj.html;
 
 			dialog.appendChild(area);
@@ -156,12 +164,12 @@ window.Dialog = {
 
 		}else{
 
-			var dialog = document.getElementById('boss-dialog');
+			var dialog = document.getElementById('dialog');
 			dialog.classList.remove('hidden');
 			dialog.innerHTML = '';
 
 			var area = document.createElement('div');
-			area.classList.add('boss-dialog-area');
+			area.classList.add('dialog-area');
 			area.innerHTML = obj.html;
 
 			if(obj.close){
@@ -173,10 +181,10 @@ window.Dialog = {
 		}
 
 		if(obj.invisible){
-			area.classList.add('boss-dialog-invisible');
+			area.classList.add('dialog-invisible');
 		}
 
-		Boss.evts.add(Boss.evtTouchUp(), document.getElementById('boss-dialog-close'), function(evts){
+		Boss.evts.add(Boss.evtTouchUp(), document.getElementById('dialog-close'), function(evts){
 
 			Boss.dialog.close();
 
@@ -187,13 +195,95 @@ window.Dialog = {
 	},
 	close: function(){
 
-		if(document.getElementById('boss-dialog')){
+		if(document.getElementById('dialog')){
 
-			var dialog = document.getElementById('boss-dialog');
+			var dialog = document.getElementById('dialog');
 			dialog.classList.add('hidden');
 			dialog.innerHTML = '';
 
 		}
+	}
+};
+window.Dualrange = {
+	unsetDisabled: (id) => {
+
+		if(document.getElementById(id)){
+
+			var el = document.getElementById(id);
+			el.parentElement.classList.remove('disabled');
+
+			var ranges = el.querySelectorAll('input[type=range]');
+
+			ranges.forEach((range) => {
+				range.removeAttribute('disabled');
+			});
+		}
+	},
+	setDisabled: (id) => {
+
+		if(document.getElementById(id)){
+
+			var el = document.getElementById(id);
+			el.parentElement.classList.add('disabled');
+
+			var ranges = el.querySelectorAll('input[type=range]');
+
+			ranges.forEach((range) => {
+				range.setAttribute('disabled', 'disabled');
+			});
+		}
+	},
+	toggleDisabled: (id) => {
+
+		if(document.getElementById(id)){
+
+			var el = document.getElementById(id);
+			if(el.parentElement.classList.contains('disabled')){
+				Dualrange.unsetDisabled(id);
+			}else{
+				Dualrange.setDisabled(id);
+			}
+		}
+	},
+	getValue: (id) => {
+
+		var min = null;
+		var max = null;
+
+		if(document.getElementById(id)){
+
+			var el = document.getElementById(id);
+			var ranges = el.querySelectorAll('input[type=range]');
+
+			var tempMin = Number(ranges[0].value);
+			var tempMax = Number(ranges[1].value);
+
+			if(tempMin == tempMax){
+
+				min = tempMin;
+				max = tempMax;
+
+				return [min, max];
+			}
+
+			if(tempMin < tempMax){
+
+				min = tempMin;
+				max = tempMax;
+
+				return [min, max];
+			}
+
+			if(tempMin > tempMax){
+
+				min = tempMax;
+				max = tempMin;
+
+				return [min, max];
+			}
+		}
+
+		return [min, max];
 	}
 };
 
@@ -215,8 +305,8 @@ class Tabs{
 		this.vue = new Vue({
 			el: '#'+this.id,
 			template: `
-				<div class="sk-tabs-btns">
-					<div v-for="(t, i) in tabs" :class="t.active"><button @click="setTab(i)">{{t.tab}}</button></div>
+				<div class="Tabs-btns">
+					<div v-for="(t, i) in tabs" :class="t.active"><button type="button" @click="setTab(i)" v-html="t.tab"></button></div>
 				</div>`,
 			data: {
 				tabs: this.conf,
