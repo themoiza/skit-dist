@@ -51,6 +51,11 @@ body {
   padding-right: 0.5rem;
 }
 
+i[class^=fi-] {
+  display: inline-block;
+  vertical-align: top;
+}
+
 /*BUTTONS*/
 .btn {
   cursor: pointer;
@@ -8742,6 +8747,60 @@ body {
 
 .col-grid-60 {
   grid-column: span 60;
+}
+
+.Modal {
+  margin: auto;
+  padding: 0;
+  box-shadow: 0px 0px 5px 1px hsl(var(--dark-hue) var(--dark-sat) var(--dark-lig)/10%);
+  border: none;
+  outline: none;
+  min-width: 30rem;
+  background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
+  border-radius: var(--rd);
+  z-index: 11;
+  max-width: 40rem;
+  position: fixed;
+}
+.Modal .TopBar {
+  display: flex;
+  border: 1px solid hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
+  border-radius: var(--rd) var(--rd) 0 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+}
+.Modal .TopBar .Move {
+  color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
+  line-height: calc(var(--field-h) * 1.25);
+  padding-left: 1rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  flex: 0 0 auto;
+  width: calc(100% - var(--field-h) * 1.25);
+  cursor: move;
+}
+.Modal .TopBar .Close {
+  height: calc(var(--field-h) * 1.25);
+  width: calc(var(--field-h) * 1.25);
+}
+.Modal .TopBar .Close button {
+  appearance: none;
+  height: calc(var(--field-h) * 1.25);
+  width: 100%;
+  border: none;
+  outline: none;
+  color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
+  background-color: transparent;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.Modal .ModalContent {
+  border: 1px solid hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
+  border-radius: 0 0 var(--rd) var(--rd);
+  border-top: 0;
 }
 
 .table-wrapper {
