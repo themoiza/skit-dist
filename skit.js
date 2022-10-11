@@ -380,6 +380,10 @@ class Modal{
 			}
 		});
 
+		if(zIndex <= 99){
+			zIndex = 99;
+		}
+
 		zIndex++;
 
 		return zIndex;
@@ -538,8 +542,6 @@ window.Tooltip = {
 		// HTML TOOLTIP
 		if(e.target && e.target !== document && e.target !== window && typeof(e.target.getAttribute('data-title-for')) == 'string'){
 
-			var vW = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
 			var atual = e.target.getAttribute('data-title-for');
 
 			var tip = document.getElementById(atual);
@@ -567,11 +569,6 @@ window.Tooltip = {
 				var top = (rect.top - tip.clientHeight - 10).toFixed(0);
 				position = 'top';
 			}
-
-			/*var colisionRight = (rect.left+(rect.width / 2) + tip.clientWidth).toFixed(0);
-			if(colisionRight > vW){
-				left = (vW - 40 - tip.clientWidth).toFixed(0);
-			}*/
 
 			tip.classList.remove('tooltip-top');
 			tip.classList.remove('tooltip-left');

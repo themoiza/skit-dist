@@ -66,6 +66,7 @@ i[class^=fi-] {
   outline: none;
   color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   background-color: hsl(var(--background-hue), var(--background-sat), calc(var(--background-lig)));
+  box-shadow: 0 0 0 1px hsl(var(--background-hue), var(--background-sat), calc(var(--background-lig)));
   border-radius: var(--rd) var(--rd) var(--rd) var(--rd);
   font-size: 0.85rem;
   min-width: 1.1rem;
@@ -95,8 +96,15 @@ i[class^=fi-] {
   padding: 0 calc(var(--pd) * 2);
 }
 
+.btn-large {
+  font-size: calc(var(--font-size) * 1.25);
+  height: calc(var(--field-h) * 1.55);
+  padding: 0 calc(var(--pd) * 2.2);
+}
+
 .btn-pri {
   background-color: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
+  box-shadow: 0 0 0 1px hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
   color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
 }
 .btn-pri:focus {
@@ -112,6 +120,7 @@ i[class^=fi-] {
 .btn-sec {
   color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
   background-color: hsl(var(--sec-hue), var(--sec-sat), var(--sec-lig));
+  box-shadow: 0 0 0 1px hsl(var(--sec-hue), var(--sec-sat), var(--sec-lig));
 }
 .btn-sec:focus {
   box-shadow: 0 0 0 2px hsl(var(--sec-hue) var(--sec-sat) var(--sec-lig)/50%);
@@ -126,6 +135,7 @@ i[class^=fi-] {
 .btn-danger {
   color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
   background-color: hsl(var(--danger-hue), var(--danger-sat), var(--danger-lig));
+  box-shadow: 0 0 0 1px hsl(var(--danger-hue), var(--danger-sat), var(--danger-lig));
 }
 .btn-danger:focus {
   box-shadow: 0 0 0 2px hsl(var(--danger-hue) var(--danger-sat) var(--danger-lig)/50%);
@@ -140,6 +150,7 @@ i[class^=fi-] {
 .btn-dark {
   color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
   background-color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
+  box-shadow: 0 0 0 1px hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
 }
 .btn-dark:focus {
   box-shadow: 0 0 0 2px hsl(var(--dark-hue) var(--dark-sat) var(--dark-lig)/50%);
@@ -154,6 +165,7 @@ i[class^=fi-] {
 .btn-light {
   color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
   background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
+  box-shadow: 0 0 0 1px hsl(var(--light-hue), var(--light-sat), var(--light-lig));
 }
 .btn-light:focus {
   box-shadow: 0 0 0 2px hsl(var(--foreground-hue) var(--foreground-sat) var(--foreground-lig)/10%);
@@ -177,6 +189,18 @@ i[class^=fi-] {
 }
 .btn-trans:active {
   box-shadow: 0 0 0 2px hsl(var(--foreground-hue) var(--foreground-sat) var(--foreground-lig)/60%);
+}
+
+.btn-join-left {
+  border-radius: 0 var(--rd) var(--rd) 0;
+}
+
+.btn-join-right {
+  border-radius: var(--rd) 0 0 var(--rd);
+}
+
+.btn-join {
+  border-radius: 0 0 0 0;
 }
 
 .card {
@@ -8104,24 +8128,24 @@ i[class^=fi-] {
 .field input[type=color], .field input[type=date], .field input[type=datetime-local], .field input[type=month], .field input[type=email], .field input[type=file], .field input[type=password], .field input[type=search], .field input[type=time], .field input[type=url], .field input[type=week], .field input[type=number], .field input[type=text], .field input[type=tel], .field select {
   display: block;
   border: none;
+  outline: none;
   padding: 0 var(--pd);
   font-family: var(--font-family);
   font-size: var(--font-size);
   color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
   background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
+  box-shadow: 0 0 0 1px hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
   border-radius: var(--rd);
   width: inherit;
   height: var(--field-h);
   min-width: 1rem;
-  outline-width: 1px;
-  outline-color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
-  outline-style: solid;
 }
 .field textarea {
   font-family: var(--font-family);
   font-size: var(--font-size);
   color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
   background-color: hsl(var(--light-hue), var(--light-sat), calc(var(--light-lig) + 10%));
+  box-shadow: 0 0 0 1px hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
   border-radius: var(--rd);
   width: 100%;
   border: none;
@@ -8129,9 +8153,6 @@ i[class^=fi-] {
   padding: var(--pd);
   min-height: calc(var(--field-h) * 2);
   tab-size: 1.5rem;
-  outline-width: 1px;
-  outline-color: hsl(var(--light-hue), var(--light-sat), calc(var(--light-lig) - 30%));
-  outline-style: solid;
 }
 .field input[type=radio], .field input[type=checkbox] {
   appearance: none;
@@ -8213,16 +8234,14 @@ i[class^=fi-] {
   color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
 }
 .field input[type=color]:focus, .field input[type=date]:focus, .field input[type=datetime-local]:focus, .field input[type=month]:focus, .field input[type=email]:focus, .field input[type=file]:focus, .field input[type=password]:focus, .field input[type=search]:focus, .field input[type=time]:focus, .field input[type=url]:focus, .field input[type=week]:focus, .field input[type=number]:focus, .field input[type=text]:focus, .field input[type=tel]:focus, .field select:focus, .field textarea:focus {
-  outline-width: 2px;
-  outline-color: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
-  outline-style: solid;
+  box-shadow: 0 0 0 2px hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
 }
 .field input:invalid, .field textarea:invalid {
   background-color: hsl(var(--danger-hue), var(--danger-sat), calc(var(--danger-lig) + 25%)) !important;
-  outline-color: hsl(var(--danger-hue), var(--danger-sat), var(--danger-lig)) !important;
+  box-shadow: 0 0 0 2px hsl(var(--danger-hue), var(--danger-sat), var(--dark-danger));
 }
 .field input:invalid:focus, .field textarea:invalid:focus {
-  outline-color: hsl(var(--danger-hue), var(--danger-sat), var(--danger-lig)) !important;
+  box-shadow: 0 0 0 2px hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
 }
 .field i {
   position: absolute;
@@ -8236,6 +8255,30 @@ i[class^=fi-] {
 }
 .field input:read-only:not(:disabled), .field textarea:read-only:not(:disabled) {
   font-style: italic;
+}
+
+.field-med input[type=color], .field-med input[type=date], .field-med input[type=datetime-local], .field-med input[type=month], .field-med input[type=email], .field-med input[type=file], .field-med input[type=password], .field-med input[type=search], .field-med input[type=time], .field-med input[type=url], .field-med input[type=week], .field-med input[type=number], .field-med input[type=text], .field-med input[type=tel], .field-med select {
+  font-size: calc(var(--font-size) * 1.15);
+  height: calc(var(--field-h) * 1.25);
+  padding: 0 calc(var(--pd) * 2);
+}
+
+.field-large input[type=color], .field-large input[type=date], .field-large input[type=datetime-local], .field-large input[type=month], .field-large input[type=email], .field-large input[type=file], .field-large input[type=password], .field-large input[type=search], .field-large input[type=time], .field-large input[type=url], .field-large input[type=week], .field-large input[type=number], .field-large input[type=text], .field-large input[type=tel], .field-large select {
+  font-size: calc(var(--font-size) * 1.25);
+  height: calc(var(--field-h) * 1.55);
+  padding: 0 calc(var(--pd) * 2.2);
+}
+
+.field-join-left {
+  border-radius: 0 var(--rd) var(--rd) 0;
+}
+
+.field-join-right {
+  border-radius: var(--rd) 0 0 var(--rd);
+}
+
+.field-join {
+  border-radius: 0 0 0 0;
 }
 
 .toggle {
@@ -8761,6 +8804,8 @@ i[class^=fi-] {
   z-index: 11;
   max-width: 40rem;
   position: fixed;
+  top: 15rem;
+  transform: translate(0, 0);
 }
 .Modal .TopBar {
   display: flex;
@@ -8801,6 +8846,7 @@ i[class^=fi-] {
   border: 1px solid hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
   border-radius: 0 0 var(--rd) var(--rd);
   border-top: 0;
+  background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
 }
 
 .table-wrapper {
