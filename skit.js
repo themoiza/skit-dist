@@ -311,8 +311,15 @@ class Modal{
 
 	constructor(id){
 
-		this.initX = 0;
-		this.initY = 0;
+		this.currentX = 0;
+		this.currentY = 0;
+
+		this.lastX = 0;
+		this.lastY = 0;
+
+		this.mouseX = 0;
+		this.mouseY = 0;
+
 		this.canMove = false;
 
 		this.comp = document.getElementById(id);
@@ -326,6 +333,23 @@ class Modal{
 		});
 	}
 
+	setCenter(){
+
+		var viewX = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+		var viewY = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+		var rect = this.comp.getBoundingClientRect();
+
+		this.currentX = (viewX / 2) - (rect.width / 2);
+		this.currentY = (viewY / 2) - (rect.height / 2);
+
+		this.lastX = this.currentX;
+		this.lastY = this.currentY;
+
+		this.comp.style.left = this.currentX+'px';
+		this.comp.style.top = this.currentY+'px';
+	}
+
 	initMove(){
 
 		document.addEventListener('mousedown', (evt) => {
@@ -336,10 +360,14 @@ class Modal{
 
 				this.canMove = true;
 
-				var rect = this.move.getBoundingClientRect();
+				this.mouseX = evt.x;
+				this.mouseY = evt.y;
 
-				this.initX = this.comp.offsetLeft + evt.x - rect.x;
-				this.initY = this.comp.offsetTop + evt.y - rect.y;
+				this.currentX = this.lastX;
+				this.currentY = this.lastY;
+
+				this.currentX = Number(this.comp.style.left.replace('px', ''));
+				this.currentY = Number(this.comp.style.top.replace('px', ''));
 
 				document.addEventListener('mousemove', this.handleMove);
 			}
@@ -348,6 +376,7 @@ class Modal{
 		document.addEventListener('mouseup', (evt) => {
 
 			this.canMove = false;
+
 			document.removeEventListener('mousemove', this.handleMove);
 		});
 	}
@@ -357,7 +386,12 @@ class Modal{
 		if(this.canMove === true){
 
 			window.requestAnimationFrame(() => {
-				this.comp.style.transform = 'translate('+(evt.x - this.initX).toFixed(0)+'px, '+(evt.y - this.initY).toFixed(0)+'px)';
+
+				this.lastX = (this.currentX + evt.x - this.mouseX).toFixed(0)
+				this.lastY = (this.currentY + evt.y - this.mouseY).toFixed(0);
+
+				this.comp.style.left = this.lastX+'px';
+				this.comp.style.top = this.lastY+'px';
 			});
 		}
 	}
@@ -414,14 +448,16 @@ class Modal{
 		this.comp.show();
 
 		this._setZIndex(this._getZIndex());
+
+		this.setCenter();
 	}
 
 	close(){
 
 		this.comp.close();
 
-		this.initX = 0;
-		this.initY = 0;
+		this.currentX = 0;
+		this.currentY = 0;
 		this.comp.style.transform = null;
 		this.comp.style.zIndex = null;
 	}
@@ -550,23 +586,23 @@ window.Tooltip = {
 
 			var position = e.target.getAttribute('data-title-position') ?? 'top';
 
-			var top = (rect.top - tip.clientHeight - 10).toFixed(0);
+			var top = (rect.top - tip.clientHeight - 15).toFixed(0);
 			var left = (rect.left+(rect.width / 2)-(tip.clientWidth / 2)).toFixed(0);
 
 			if(top < 5 || position == 'bottom'){
-				top = (rect.top + rect.height + 10).toFixed(0);
+				top = (rect.top + rect.height + 5).toFixed(0);
 				position = 'bottom';
 
 			}else if(position == 'right'){
-				top = (rect.top + (rect.height / 2) - 10).toFixed(0);
-				left = (rect.left + rect.width + 10).toFixed(0);
+				top = (rect.top + (rect.height / 2) - 15).toFixed(0);
+				left = (rect.left + rect.width + 15).toFixed(0);
 				position = 'right';
 			}else if(position == 'left'){
-				top = (rect.top + (rect.height / 2) - 10).toFixed(0);
-				left = (rect.left - (rect.width * 2) - 10).toFixed(0);
+				top = (rect.top + (rect.height / 2) - 15).toFixed(0);
+				left = (rect.left - (rect.width * 2) - 15).toFixed(0);
 				position = 'left';
 			}else{
-				var top = (rect.top - tip.clientHeight - 10).toFixed(0);
+				var top = (rect.top - tip.clientHeight - 15).toFixed(0);
 				position = 'top';
 			}
 

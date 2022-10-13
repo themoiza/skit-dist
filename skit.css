@@ -8793,7 +8793,7 @@ i[class^=fi-] {
 }
 
 .Modal {
-  margin: auto;
+  position: fixed;
   padding: 0;
   box-shadow: 0px 0px 5px 1px hsl(var(--dark-hue) var(--dark-sat) var(--dark-lig)/10%);
   border: none;
@@ -8802,10 +8802,9 @@ i[class^=fi-] {
   background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
   border-radius: var(--rd);
   z-index: 11;
+  top: 0;
+  left: 0;
   max-width: 40rem;
-  position: fixed;
-  top: 15rem;
-  transform: translate(0, 0);
 }
 .Modal .TopBar {
   display: flex;
@@ -8982,7 +8981,9 @@ table tbody td {
   user-select: none;
   color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
   background-color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   max-width: 20rem;
+  width: auto;
   padding: 0.5rem 0.75rem;
   font-size: 0.85rem;
   text-align: left;
@@ -9005,12 +9006,13 @@ table tbody td {
   border-style: solid;
   border-width: var(--triangle-size) var(--triangle-size) 0 var(--triangle-size);
   border-color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig)) transparent transparent transparent;
+  filter: drop-shadow(0px 2px 1px rgba(0, 0, 0, 0.1));
 }
 
 .tooltip-top::after {
   left: 50%;
   bottom: 0;
-  transform: translate(calc(var(--triangle-size) * -1), calc(var(--triangle-size) - 1px));
+  transform: translate(calc(var(--triangle-size) * -1), calc(var(--triangle-size) + 1px));
   border-width: var(--triangle-size) var(--triangle-size) 0 var(--triangle-size);
   border-color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig)) transparent transparent transparent;
 }
@@ -9018,25 +9020,28 @@ table tbody td {
 .tooltip-bottom::after {
   left: 50%;
   top: 0;
-  transform: translate(calc(var(--triangle-size) * -1), calc(var(--triangle-size) * -1));
+  transform: translate(calc(var(--triangle-size) * -1), calc(var(--triangle-size) * -1 - 2px));
   border-width: 0 var(--triangle-size) var(--triangle-size) var(--triangle-size);
   border-color: transparent transparent hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig)) transparent;
+  filter: drop-shadow(0px -2px 1px rgba(0, 0, 0, 0.1));
 }
 
 .tooltip-left::after {
   right: 0;
   top: 50%;
-  transform: translate(calc(var(--triangle-size) * 1), calc(var(--triangle-size) * -1));
+  transform: translate(calc(var(--triangle-size) * 1 + 2px), calc(var(--triangle-size) * -1));
   border-width: var(--triangle-size) 0 var(--triangle-size) var(--triangle-size);
   border-color: transparent transparent transparent hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+  filter: drop-shadow(2px 0px 1px rgba(0, 0, 0, 0.1));
 }
 
 .tooltip-right::after {
   left: 0;
   top: 50%;
-  transform: translate(calc(var(--triangle-size) * -1), calc(var(--triangle-size) * -1));
+  transform: translate(calc(var(--triangle-size) * -1), calc(var(--triangle-size) * -1 - 1px));
   border-width: var(--triangle-size) var(--triangle-size) var(--triangle-size) 0;
   border-color: transparent hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig)) transparent transparent;
+  filter: drop-shadow(-4px 0px 1px rgba(0, 0, 0, 0.1));
 }
 
 .tooltip-active {
