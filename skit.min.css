@@ -8810,6 +8810,7 @@ i[class^=fi-] {
   display: flex;
   border: 1px solid hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
   border-radius: var(--rd) var(--rd) 0 0;
+  touch-action: none;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
