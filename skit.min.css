@@ -21,6 +21,11 @@
 
 body {
   background-color: hsl(var(--background-hue), var(--background-sat), calc(var(--background-lig) - 3%));
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
 }
 
 .Img-block {
@@ -8351,6 +8356,7 @@ i[class^=fi-] {
   height: var(--field-h);
   min-width: 3rem;
   width: inherit;
+  touch-action: none;
 }
 .field .Dualrange::before {
   content: "";
@@ -8448,6 +8454,7 @@ i[class^=fi-] {
   min-width: 1rem;
   outline: none;
   cursor: pointer;
+  touch-action: none;
   accent-color: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
 }
 .field .Range:focus {
@@ -8814,7 +8821,7 @@ i[class^=fi-] {
   z-index: 11;
   top: 0;
   left: 0;
-  max-width: 40rem;
+  max-width: calc(100vw - 1.6rem);
 }
 .Modal .TopBar {
   display: flex;
@@ -8920,6 +8927,8 @@ table tbody td {
   padding-top: 5px;
   border: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
   border-radius: var(--radius) var(--radius) 0 0;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 .Tabs-btns button {
   appearance: none;
@@ -8959,6 +8968,7 @@ table tbody td {
   border: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
   border-radius: 0 0 var(--radius) var(--radius);
   border-top: none;
+  overflow-x: auto;
   /* SECOND LEVEL */
   /* SECOND LEVEL */
 }
