@@ -90,6 +90,12 @@ i[class^=fi-] {
   box-shadow: none !important;
 }
 
+.btn-tiny {
+  font-size: calc(var(--font-size) * 0.65);
+  height: calc(var(--field-h) * 0.7);
+  padding: 0 calc(var(--pd));
+}
+
 .btn-med {
   font-size: calc(var(--font-size) * 1.15);
   height: calc(var(--field-h) * 1.25);
@@ -284,6 +290,10 @@ i[class^=fi-] {
 
 .flex-vcenter {
   align-items: center;
+}
+
+.flex-space-between {
+  justify-content: space-between;
 }
 
 .col-flex {
@@ -8795,11 +8805,11 @@ i[class^=fi-] {
 .Modal {
   position: fixed;
   padding: 0;
-  box-shadow: 0px 0px 5px 1px hsl(var(--dark-hue) var(--dark-sat) var(--dark-lig)/10%);
+  box-shadow: 0px 0px 5px 1px hsl(var(--foreground-hue) var(--foreground-sat) var(--foreground-lig)/20%);
   border: none;
   outline: none;
   min-width: 30rem;
-  background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
   border-radius: var(--rd);
   z-index: 11;
   top: 0;
@@ -8808,7 +8818,7 @@ i[class^=fi-] {
 }
 .Modal .TopBar {
   display: flex;
-  border: 1px solid hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
+  border: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
   border-radius: var(--rd) var(--rd) 0 0;
   touch-action: none;
   user-select: none;
@@ -8818,7 +8828,7 @@ i[class^=fi-] {
   -o-user-select: none;
 }
 .Modal .TopBar .Move {
-  color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   line-height: calc(var(--field-h) * 1.25);
   padding-left: 1rem;
   font-size: 0.8rem;
@@ -8837,16 +8847,16 @@ i[class^=fi-] {
   width: 100%;
   border: none;
   outline: none;
-  color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   background-color: transparent;
   font-size: 1.4rem;
   cursor: pointer;
 }
 .Modal .ModalContent {
-  border: 1px solid hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
+  border: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
   border-radius: 0 0 var(--rd) var(--rd);
   border-top: 0;
-  background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
 }
 
 .table-wrapper {
@@ -8859,8 +8869,11 @@ i[class^=fi-] {
   justify-content: center;
   align-items: center;
   writing-mode: vertical-lr;
-  background-color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
-  color: hsl(var(--background-hue), var(--background-sat), var(--background-lig-soft));
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+  border-top: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
+  border-left: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
+  border-bottom: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
   width: 100%;
   padding: 1.5rem 0;
   box-sizing: border-box;
@@ -8874,23 +8887,23 @@ table {
   border-collapse: collapse;
 }
 table thead {
-  background-color: hsl(var(--foreground-hue) var(--foreground-sat) var(--foreground-lig-soft)/10%);
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
 }
 table thead th {
-  color: hsl(var(--background-hue), var(--background-sat), var(--background-lig-soft));
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   border: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
   padding: 0.5rem 0.75rem;
   font-weight: bold;
   font-size: 0.9rem;
 }
 table tbody tr:nth-child(even) {
-  background-color: hsl(var(--foreground-hue) var(--foreground-sat) var(--foreground-lig-soft)/8%);
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
 }
 table tbody tr:nth-child(odd) {
-  background-color: hsl(var(--foreground-hue) var(--foreground-sat) var(--foreground-lig-soft)/10%);
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
 }
 table tbody td {
-  color: hsl(var(--background-hue), var(--background-sat), var(--background-lig-soft));
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   border: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
   padding: 0.5rem 0.75rem;
   font-size: 0.85rem;
@@ -9261,5 +9274,12 @@ table tbody td {
   }
   100% {
     transform: scale(1) translateY(0%) perspective(100vw) rotateX(0deg);
+  }
+}
+@media all and (max-width: 1023px) {
+  .no-mob {
+    display: none !important;
+    position: absolute;
+    margin-left: -99999px;
   }
 }
