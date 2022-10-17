@@ -62,7 +62,7 @@ i[class^=fi-] {
 }
 
 .spin::before {
-  animation: spin-animation 2s ease-in-out infinite;
+  animation: spin-animation 1.5s ease-in-out infinite;
   transform-origin: center center;
   display: inline-block;
 }
@@ -8878,6 +8878,9 @@ i[class^=fi-] {
   border-radius: 0 0 var(--rd) var(--rd);
   border-top: 0;
   background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+  overflow-y: auto;
+  overflow-x: auto;
+  max-height: calc(100vh - 7rem);
 }
 
 .table-wrapper {
@@ -8917,6 +8920,9 @@ table thead th {
   font-weight: bold;
   font-size: 0.9rem;
 }
+table tbody {
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+}
 table tbody tr:nth-child(even) {
   background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
 }
@@ -8928,6 +8934,9 @@ table tbody td {
   border: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
   padding: 0.5rem 0.75rem;
   font-size: 0.85rem;
+}
+table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.08);
 }
 
 .Tabs {
