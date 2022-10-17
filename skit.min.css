@@ -61,6 +61,20 @@ i[class^=fi-] {
   vertical-align: top;
 }
 
+.spin::before {
+  animation: spin-animation 2s ease-in-out infinite;
+  transform-origin: center center;
+  display: inline-block;
+}
+
+@keyframes spin-animation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 /*BUTTONS*/
 .btn {
   cursor: pointer;
