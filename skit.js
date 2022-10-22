@@ -4,26 +4,26 @@ window.Confirm = function(obj){
 
 		let message = '';
 		if(obj.message){
-			message = `<div class="Confirm-message">`+obj.message+`</div>`;
+			message = `<div class="ConfirmMessage">`+obj.message+`</div>`;
 		}
 
 		let mask = `
-			<div class="Confirm no-select">
-				<div class="Confirm-title">`+obj.title+`</div>
+			<div class="Confirm NoSelect">
+				<div class="ConfirmTitle">`+obj.title+`</div>
 				`+message+`
 			</div>
-			<div class="Confirm-actions">
+			<div class="ConfirmActions">
 				<button id="Confirm-ok" class="`+obj.okclass+`">`+obj.ok+`</button>
 			</div>`;
 
 		if(obj.no !== false){
 
 			mask = `
-				<div class="Confirm no-select">
-					<div class="Confirm-title">`+obj.title+`</div>
+				<div class="Confirm NoSelect">
+					<div class="ConfirmTitle">`+obj.title+`</div>
 					`+message+`
 				</div>
-				<div class="Confirm-actions">
+				<div class="ConfirmActions">
 					<button id="Confirm-ok" class="`+obj.okclass+`">`+obj.ok+`</button> <button id="Confirm-no" class="`+obj.noclass+`">`+obj.no+`</button> 
 				</div>`;
 		}
@@ -39,7 +39,7 @@ window.Confirm = function(obj){
 		}
 
 		document.getElementById('Confirm').showModal();
-		document.body.classList.add('No-scroll');
+		document.body.classList.add('NoScroll');
 
 		if(document.getElementById('Confirm-ok')){
 			document.getElementById('Confirm-ok').focus();
@@ -50,7 +50,7 @@ window.Confirm = function(obj){
 			if(div === e.target){
 
 				document.getElementById('Confirm').close();
-				document.body.classList.remove('No-scroll');
+				document.body.classList.remove('NoScroll');
 
 				if(obj.cancelFn){
 					obj.cancelFn();
@@ -61,7 +61,7 @@ window.Confirm = function(obj){
 		document.getElementById('Confirm-ok').addEventListener('click', (e) => {
 
 			document.getElementById('Confirm').close();
-			document.body.classList.remove('No-scroll');
+			document.body.classList.remove('NoScroll');
 
 			if(obj.okFn){
 				obj.okFn();
@@ -73,7 +73,7 @@ window.Confirm = function(obj){
 			if(e.keyCode == 13){
 
 				document.getElementById('Confirm').close();
-				document.body.classList.remove('No-scroll');
+				document.body.classList.remove('NoScroll');
 
 				if(obj.okFn){
 					obj.okFn();
@@ -84,7 +84,7 @@ window.Confirm = function(obj){
 		document.getElementById('Confirm-no').addEventListener('click', (e) => {
 
 			document.getElementById('Confirm').close();
-			document.body.classList.remove('No-scroll');
+			document.body.classList.remove('NoScroll');
 
 			if(obj.noFn){
 				obj.noFn();
@@ -96,7 +96,7 @@ window.Confirm = function(obj){
 			if(e.keyCode == 13){
 
 				document.getElementById('Confirm').close();
-				document.body.classList.remove('No-scroll');
+				document.body.classList.remove('NoScroll');
 				obj.noFn();
 			}
 		});
@@ -342,7 +342,7 @@ window.Dualrange = {
 
 class Modal{
 
-	constructor(id){
+	constructor(id, opts){
 
 		this.currentX = 0;
 		this.currentY = 0;
@@ -357,9 +357,55 @@ class Modal{
 
 		this.data = new Object;
 
-		this.canMove = false;
+		// OPTIONS
+		this.options = {
+			'id': id,
+			'canMove': true,
+			'size': 'free',
+			'title': 'MODAL',
+			'html': ''
+		};
 
-		this.comp = document.getElementById(id);
+		if(opts){
+
+			if(opts.title){
+				this.options.title = opts.title.substring(0, 50);
+			}
+
+			if(typeof(opts.canMove) === 'boolean'){
+				this.options.canMove = opts.canMove;
+			}
+		}
+
+		this._canMove = false;
+
+		// EXIST DIALOG IN HTML
+		if(document.getElementById(id)){
+
+			this.comp = document.getElementById(id);
+
+		// CREATE NEW DIALOG
+		}else{
+
+			this.comp = document.createElement('dialog');
+			this.comp.classList.add('Modal');
+			this.comp.setAttribute('id', id);
+
+			document.body.appendChild(this.comp);
+
+			this.options.html = `
+				<div class="TopBar">
+					<div class="Move">`+this.options.title+`</div>
+					<div class="Close"><button data-skit="close">⨉</button></div>
+				</div>
+				<div class="ModalContent">
+					<div class="pd1">
+						<p>...<p>
+					</div>
+				</div>`;
+
+			this.comp.innerHTML = this.options.html;
+		}
 
 		this.move = this.comp.querySelector('.Move');
 
@@ -368,6 +414,13 @@ class Modal{
 		this.comp.addEventListener('click', () => {
 			this.setFocus();
 		});
+
+		if(this.comp.querySelector('[data-skit="close"]')){
+
+			this.comp.querySelector('[data-skit="close"]').addEventListener('click', (e) => {
+				this.close();
+			});
+		}
 	}
 
 	setData(o){
@@ -408,13 +461,19 @@ class Modal{
 
 	initMove(){
 
+		if(!this.options.canMove){
+
+			this.move.style.cursor = 'no-drop';
+			return false;
+		}
+
 		document.addEventListener('mousedown', (evt) => {
 
-			if(evt.target == this.move){
+			if(this.move && evt.target == this.move){
 
 				this._setZIndex(this._getZIndex());
 
-				this.canMove = true;
+				this._canMove = true;
 
 				this.mouseX = evt.x;
 				this.mouseY = evt.y;
@@ -431,11 +490,11 @@ class Modal{
 
 		document.addEventListener('touchstart', (evt) => {
 
-			if(evt.target == this.move){
+			if(this.move && evt.target == this.move){
 
 				this._setZIndex(this._getZIndex());
 
-				this.canMove = true;
+				this._canMove = true;
 
 				this.mouseX = evt.touches[0].pageX;
 				this.mouseY = evt.touches[0].pageY;
@@ -452,14 +511,14 @@ class Modal{
 
 		document.addEventListener('mouseup', (evt) => {
 
-			this.canMove = false;
+			this._canMove = false;
 
 			document.removeEventListener('mousemove', this.handleMove);
 		});
 
 		document.addEventListener('touchend', (evt) => {
 
-			this.canMove = false;
+			this._canMove = false;
 
 			document.removeEventListener('touchmove', this.handleMove);
 		});
@@ -467,7 +526,11 @@ class Modal{
 
 	handleMove = (evt) => {
 
-		if(this.canMove === true){
+		if(!this.options.canMove){
+			return false;
+		}
+
+		if(this._canMove === true){
 
 			window.requestAnimationFrame(() => {
 
@@ -516,8 +579,8 @@ class Modal{
 
 	setTitle(t){
 
-		this.title = t.substring(0, 50);
-		this.comp.querySelector('.Move').textContent = this.title;
+		this.options.title = t.substring(0, 50);
+		this.comp.querySelector('.Move').textContent = this.options.title;
 	}
 
 	setContent(h){
@@ -587,7 +650,7 @@ class Tabs{
 		this.vue = new Vue({
 			el: '#'+this.id,
 			template: `
-				<div class="Tabs-btns">
+				<div class="TabsBtns">
 					<div v-for="(t, i) in tabs" :class="t.active"><button type="button" @click="setTab(i)" v-html="t.tab"></button></div>
 				</div>`,
 			data: {
@@ -642,13 +705,13 @@ class Tabs{
 
 				if(index == dv.getAttribute('data-tab')){
 
-					dv.classList.remove('inactive');
-					dv.classList.add('active');
+					dv.classList.remove('TabsInactive');
+					dv.classList.add('TabsActive');
 
 				}else{
 
-					dv.classList.add('inactive');
-					dv.classList.remove('active');
+					dv.classList.add('TabsInactive');
+					dv.classList.remove('TabsActive');
 				}
 			}
 		}
@@ -673,7 +736,7 @@ window.Tooltip = {
 				var randomId = 'tip'+(Math.random()*1000000).toFixed(0);
 
 				var div = document.createElement('div');
-				div.classList.add('tooltip');
+				div.classList.add('Tooltip');
 				div.setAttribute('id', randomId);
 				div.textContent = e.target.getAttribute('data-title');
 
@@ -698,26 +761,26 @@ window.Tooltip = {
 
 			if(top < 5 || position == 'bottom'){
 				top = (rect.top + rect.height + 5).toFixed(0);
-				position = 'bottom';
+				position = 'Bottom';
 
 			}else if(position == 'right'){
 				top = (rect.top + (rect.height / 2) - 15).toFixed(0);
 				left = (rect.left + rect.width + 15).toFixed(0);
-				position = 'right';
+				position = 'Right';
 			}else if(position == 'left'){
 				top = (rect.top + (rect.height / 2) - 15).toFixed(0);
 				left = (rect.left - (rect.width * 2) - 15).toFixed(0);
-				position = 'left';
+				position = 'Left';
 			}else{
 				var top = (rect.top - tip.clientHeight - 15).toFixed(0);
-				position = 'top';
+				position = 'Top';
 			}
 
-			tip.classList.remove('tooltip-top');
-			tip.classList.remove('tooltip-left');
-			tip.classList.remove('tooltip-right');
-			tip.classList.remove('tooltip-bottom');
-			tip.classList.add('tooltip-'+position);
+			tip.classList.remove('TooltipTop');
+			tip.classList.remove('TooltipLeft');
+			tip.classList.remove('TooltipRight');
+			tip.classList.remove('TooltipBottom');
+			tip.classList.add('Tooltip'+position);
 
 			if(tip.getAttribute('data-apply') == null){
 
@@ -732,7 +795,7 @@ window.Tooltip = {
 				tip.style.left = left+'px';
 
 				tip.setAttribute('data-apply', 'true');
-				tip.classList.add('tooltip-active');
+				tip.classList.add('TooltipActive');
 			}
 		}else{
 
@@ -746,7 +809,7 @@ window.Tooltip = {
 
 				var tt = document.getElementById(x);
 				tt.removeAttribute('data-apply');
-				tt.classList.remove('tooltip-active');
+				tt.classList.remove('TooltipActive');
 				delete toolTips[x];
 			}
 		}
@@ -799,14 +862,14 @@ window.Warning = (obj) => {
 
 	var colors = ['danger', 'pri', 'sec', 'dark', 'light'];
 	var positions = {
-		1: 'Warning-Left-Bottom',
-		2: 'Warning-Center-Bottom',
-		3: 'Warning-Right-Bottom',
-		4: 'Warning-Left-Center',
-		6: 'Warning-Right-Center',
-		7: 'Warning-Left-Top',
-		8: 'Warning-Center-Top',
-		9: 'Warning-Right-Top'
+		1: 'WarningLeftBottom',
+		2: 'WarningCenterBottom',
+		3: 'WarningRightBottom',
+		4: 'WarningLeftCenter',
+		6: 'WarningRightCenter',
+		7: 'WarningLeftTop',
+		8: 'WarningCenterTop',
+		9: 'WarningRightTop'
 	};
 
 	var warnLimit = 5;
@@ -825,7 +888,10 @@ window.Warning = (obj) => {
 		// VALIDATE COLORS
 		if(colors.includes(color)){
 
-			color = 'Warning-'+colors[colors.indexOf(color)];
+			var cl = colors[colors.indexOf(color)];
+			cl = cl.charAt(0).toUpperCase() + cl.slice(1);
+
+			color = 'Warning'+cl;
 
 		// NOT VALID COLORS
 		}else{
@@ -846,10 +912,10 @@ window.Warning = (obj) => {
 
 		var mask = `<div style="animation-duration: `+timeout+`ms" class="Warning `+color+`" data-id="`+id+`">
 				<div>
-					<div class="title">`+title+`</div>
+					<div class="WarningTitle">`+title+`</div>
 					<div>`+message+`</div>
 				</div>
-				<div><button class="Warning-close">⨉</button></div>
+				<div><button class="WarningClose">⨉</button></div>
 			</div>`;
 
 		// WARNING EXISTS
@@ -885,7 +951,7 @@ window.Warning = (obj) => {
 		}
 
 		/* REMOVE EMPTY CANVAS */
-		var removes = warn.querySelectorAll('.Warning-canvas');
+		var removes = warn.querySelectorAll('.WarningCanvas');
 		removes.forEach(function(el){
 
 			if(el.innerHTML == ''){
@@ -905,7 +971,7 @@ window.Warning = (obj) => {
 			if(totalCanvas.length < warnLimit){
 
 				var warnLine = document.createElement('div');
-				warnLine.setAttribute('class', 'Warning-canvas');
+				warnLine.setAttribute('class', 'WarningCanvas');
 				warnLine.innerHTML = mask;
 
 				warn.appendChild(warnLine);
@@ -930,10 +996,10 @@ window.Warning = (obj) => {
 			warnLine.setAttribute('class', `Warning `+color);
 
 			warnLine.innerHTML = `<div>
-					<div class="title">`+title+`</div>
+					<div class="WarningTitle">`+title+`</div>
 					<div>`+message+`</div>
 				</div>
-				<div><button class="Warning-close">⨉</button></div>`;
+				<div><button class="WarningClose">⨉</button></div>`;
 		}
 	}
 };
