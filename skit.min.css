@@ -5,6 +5,19 @@
   --rd: var(--radius);
   --font-size: 0.9rem;
   --field-h: calc(1rem * 2);
+  --clock-picker: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktY2xvY2siIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHBhdGggZD0iTTggMy41YS41LjUgMCAwIDAtMSAwVjlhLjUuNSAwIDAgMCAuMjUyLjQzNGwzLjUgMmEuNS41IDAgMCAwIC40OTYtLjg2OEw4IDguNzFWMy41eiIvPgogIDxwYXRoIGQ9Ik04IDE2QTggOCAwIDEgMCA4IDBhOCA4IDAgMCAwIDAgMTZ6bTctOEE3IDcgMCAxIDEgMSA4YTcgNyAwIDAgMSAxNCAweiIvPgo8L3N2Zz4=");
+  --calendar-picker: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktY2FsZW5kYXIiIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHBhdGggZD0iTTMuNSAwYS41LjUgMCAwIDEgLjUuNVYxaDhWLjVhLjUuNSAwIDAgMSAxIDBWMWgxYTIgMiAwIDAgMSAyIDJ2MTFhMiAyIDAgMCAxLTIgMkgyYTIgMiAwIDAgMS0yLTJWM2EyIDIgMCAwIDEgMi0yaDFWLjVhLjUuNSAwIDAgMSAuNS0uNXpNMSA0djEwYTEgMSAwIDAgMCAxIDFoMTJhMSAxIDAgMCAwIDEtMVY0SDF6Ii8+Cjwvc3ZnPg==");
+  --mag-glass: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktc2VhcmNoIiB2aWV3Qm94PSIwIDAgMTYgMTYiPgogIDxwYXRoIGQ9Ik0xMS43NDIgMTAuMzQ0YTYuNSA2LjUgMCAxIDAtMS4zOTcgMS4zOThoLS4wMDFjLjAzLjA0LjA2Mi4wNzguMDk4LjExNWwzLjg1IDMuODVhMSAxIDAgMCAwIDEuNDE1LTEuNDE0bC0zLjg1LTMuODVhMS4wMDcgMS4wMDcgMCAwIDAtLjExNS0uMXpNMTIgNi41YTUuNSA1LjUgMCAxIDEtMTEgMCA1LjUgNS41IDAgMCAxIDExIDB6Ii8+Cjwvc3ZnPg==");
+  --chevron-up: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktY2hldnJvbi11cCIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik03LjY0NiA0LjY0NmEuNS41IDAgMCAxIC43MDggMGw2IDZhLjUuNSAwIDAgMS0uNzA4LjcwOEw4IDUuNzA3bC01LjY0NiA1LjY0N2EuNS41IDAgMCAxLS43MDgtLjcwOGw2LTZ6Ii8+Cjwvc3ZnPg==");
+  --chevron-down: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktY2hldnJvbi1kb3duIiB2aWV3Qm94PSIwIDAgMTYgMTYiPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEuNjQ2IDQuNjQ2YS41LjUgMCAwIDEgLjcwOCAwTDggMTAuMjkzbDUuNjQ2LTUuNjQ3YS41LjUgMCAwIDEgLjcwOC43MDhsLTYgNmEuNS41IDAgMCAxLS43MDggMGwtNi02YS41LjUgMCAwIDEgMC0uNzA4eiIvPjwvc3ZnPg==");
+}
+
+.DarkMode {
+  --clock-picker: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9ImJpIGJpLWNsb2NrIiB2aWV3Qm94PSIwIDAgMTYgMTYiPgogIDxwYXRoIGQ9Ik04IDMuNWEuNS41IDAgMCAwLTEgMFY5YS41LjUgMCAwIDAgLjI1Mi40MzRsMy41IDJhLjUuNSAwIDAgMCAuNDk2LS44NjhMOCA4LjcxVjMuNXoiLz4KICA8cGF0aCBkPSJNOCAxNkE4IDggMCAxIDAgOCAwYTggOCAwIDAgMCAwIDE2em03LThBNyA3IDAgMSAxIDEgOGE3IDcgMCAwIDEgMTQgMHoiLz4KPC9zdmc+");
+  --calendar-picker: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9ImJpIGJpLWNhbGVuZGFyIiB2aWV3Qm94PSIwIDAgMTYgMTYiPgogIDxwYXRoIGQ9Ik0zLjUgMGEuNS41IDAgMCAxIC41LjVWMWg4Vi41YS41LjUgMCAwIDEgMSAwVjFoMWEyIDIgMCAwIDEgMiAydjExYTIgMiAwIDAgMS0yIDJIMmEyIDIgMCAwIDEtMi0yVjNhMiAyIDAgMCAxIDItMmgxVi41YS41LjUgMCAwIDEgLjUtLjV6TTEgNHYxMGExIDEgMCAwIDAgMSAxaDEyYTEgMSAwIDAgMCAxLTFWNEgxeiIvPgo8L3N2Zz4=");
+  --mag-glass: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9ImJpIGJpLXNlYXJjaCIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBkPSJNMTEuNzQyIDEwLjM0NGE2LjUgNi41IDAgMSAwLTEuMzk3IDEuMzk4aC0uMDAxYy4wMy4wNC4wNjIuMDc4LjA5OC4xMTVsMy44NSAzLjg1YTEgMSAwIDAgMCAxLjQxNS0xLjQxNGwtMy44NS0zLjg1YTEuMDA3IDEuMDA3IDAgMCAwLS4xMTUtLjF6TTEyIDYuNWE1LjUgNS41IDAgMSAxLTExIDAgNS41IDUuNSAwIDAgMSAxMSAweiIvPgo8L3N2Zz4=");
+  --chevron-up: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9ImJpIGJpLWNoZXZyb24tdXAiIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNy42NDYgNC42NDZhLjUuNSAwIDAgMSAuNzA4IDBsNiA2YS41LjUgMCAwIDEtLjcwOC43MDhMOCA1LjcwN2wtNS42NDYgNS42NDdhLjUuNSAwIDAgMS0uNzA4LS43MDhsNi02eiIvPgo8L3N2Zz4=");
+  --chevron-down: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9ImJpIGJpLWNoZXZyb24tZG93biIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xLjY0NiA0LjY0NmEuNS41IDAgMCAxIC43MDggMEw4IDEwLjI5M2w1LjY0Ni01LjY0N2EuNS41IDAgMCAxIC43MDguNzA4bC02IDZhLjUuNSAwIDAgMS0uNzA4IDBsLTYtNmEuNS41IDAgMCAxIDAtLjcwOHoiLz48L3N2Zz4=");
 }
 
 *,
@@ -8166,20 +8179,58 @@ i[class^=fi-] {
   padding: 0 var(--pd);
   font-family: var(--font-family);
   font-size: var(--font-size);
-  color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
-  background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
-  box-shadow: 0 0 0 1px hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+  box-shadow: 0 0 0 1px hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
   border-radius: var(--rd);
   width: inherit;
   height: var(--field-h);
   min-width: 1rem;
 }
+.field input[type=date], .field input[type=datetime-local], .field input[type=month], .field input[type=week] {
+  background-image: var(--calendar-picker);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-position-x: calc(100% - 0.25rem);
+  background-size: 0.8rem 0.8rem;
+}
+.field input[type=time] {
+  background-image: var(--clock-picker);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-position-x: calc(100% - 0.25rem);
+  background-size: 0.8rem 0.8rem;
+}
+.field input[type=number]::-webkit-inner-spin-button {
+  opacity: 0.5;
+}
+.field input[type=date]::-webkit-calendar-picker-indicator, .field input[type=datetime-local]::-webkit-calendar-picker-indicator, .field input[type=month]::-webkit-calendar-picker-indicator, .field input[type=week]::-webkit-calendar-picker-indicator, .field input[type=time]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+.field select {
+  padding: 0 calc(var(--pd) * 3) 0 var(--pd);
+  appearance: none;
+  background-image: var(--chevron-down);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-position-x: calc(100% - 0.25rem);
+}
+.field select:focus {
+  background-image: var(--chevron-up);
+}
+.field input[type=search] {
+  background-image: var(--mag-glass);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-position-x: calc(100% - 0.25rem);
+  background-size: 0.8rem 0.8rem;
+}
 .field textarea {
   font-family: var(--font-family);
   font-size: var(--font-size);
-  color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
-  background-color: hsl(var(--light-hue), var(--light-sat), calc(var(--light-lig) + 10%));
-  box-shadow: 0 0 0 1px hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+  box-shadow: 0 0 0 1px hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
   border-radius: var(--rd);
   width: 100%;
   border: none;
@@ -8265,17 +8316,17 @@ i[class^=fi-] {
 }
 .field input::placeholder, .field textarea::placeholder {
   opacity: 0.5;
-  color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
 }
 .field input[type=color]:focus, .field input[type=date]:focus, .field input[type=datetime-local]:focus, .field input[type=month]:focus, .field input[type=email]:focus, .field input[type=file]:focus, .field input[type=password]:focus, .field input[type=search]:focus, .field input[type=time]:focus, .field input[type=url]:focus, .field input[type=week]:focus, .field input[type=number]:focus, .field input[type=text]:focus, .field input[type=tel]:focus, .field select:focus, .field textarea:focus {
-  box-shadow: 0 0 0 2px hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
+  box-shadow: 0 0 0 2px hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
 }
 .field input:invalid, .field textarea:invalid {
   background-color: hsl(var(--danger-hue), var(--danger-sat), calc(var(--danger-lig) + 25%)) !important;
   box-shadow: 0 0 0 2px hsl(var(--danger-hue), var(--danger-sat), var(--dark-danger));
 }
 .field input:invalid:focus, .field textarea:invalid:focus {
-  box-shadow: 0 0 0 2px hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
+  box-shadow: 0 0 0 2px hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
 }
 .field i {
   position: absolute;
@@ -8530,8 +8581,8 @@ i[class^=fi-] {
   display: block;
   border: none;
   outline: none;
-  background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
-  box-shadow: 0 0 0 1px hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+  box-shadow: 0 0 0 1px hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
   border-radius: var(--rd);
   width: inherit;
   height: var(--field-h);
@@ -8539,10 +8590,15 @@ i[class^=fi-] {
   position: relative;
 }
 .SuperSelect:focus, .SuperSelect:focus-within, .SuperSelect:focus-visible {
-  box-shadow: 0 0 0 2px hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
+  box-shadow: 0 0 0 2px hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
+  border-radius: var(--rd) var(--rd) 0 0;
 }
 .SuperSelect:focus-within .SuperSelectComp {
   display: block;
+  box-shadow: 0 2px 0 2px hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
+}
+.SuperSelect:focus .SuperSelectLabel, .SuperSelect:focus-within .SuperSelectLabel {
+  background-image: var(--chevron-up);
 }
 .SuperSelect .SuperSelectLabel {
   display: block;
@@ -8552,30 +8608,55 @@ i[class^=fi-] {
   padding: 0 var(--pd);
   font-family: var(--font-family);
   font-size: var(--font-size);
-  color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  background-image: var(--chevron-down);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-position-x: calc(100% - 0.25rem);
+}
+.SuperSelect .SuperSelectComp {
+  display: none;
+  position: absolute;
+  width: inherit;
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+  box-shadow: 0 0 0 1px hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
+  border-radius: 0 0 var(--rd) var(--rd);
+  z-index: 1;
+}
+.SuperSelect .SuperSelectComp label {
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: block;
+  width: 100%;
+  padding: calc(var(--pd) / 2) var(--pd);
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   -o-user-select: none;
 }
-.SuperSelect .SuperSelectComp {
-  display: none;
-  position: absolute;
-  width: inherit;
-  background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
-  box-shadow: 0 0 0 1px hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
-  border-radius: var(--rd);
-}
-.SuperSelect .SuperSelectComp label {
-  cursor: pointer;
-  font-size: 0.85rem;
-}
 .SuperSelect .SuperSelectComp .SuperSelectSearch {
   display: block;
   width: 100%;
   padding: var(--pd);
+}
+.SuperSelect .SuperSelectComp .SuperSelectSearch input {
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+  box-shadow: 0 0 0 1px hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
+  background-image: var(--mag-glass);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-position-x: calc(100% - 0.25rem);
+  background-size: 0.8rem 0.8rem;
 }
 .SuperSelect .SuperSelectComp .SuperSelectList {
   display: block;
@@ -8583,11 +8664,72 @@ i[class^=fi-] {
   padding: var(--pd);
   overflow-y: auto;
   overflow-x: hidden;
-  min-height: calc(var(--field-h) * 3);
-  max-height: calc(100vh - 10rem);
+  min-height: var(--field-h);
+  max-height: calc(80vh - 10rem);
 }
-.SuperSelect .SuperSelectComp .SuperSelectList div {
-  padding: calc(var(--pd) / 2) 0;
+.SuperSelect .SuperSelectComp .SuperSelectList .SuperSelectGroup {
+  display: block;
+  width: 100%;
+}
+.SuperSelect .SuperSelectComp .SuperSelectList .SuperSelectGroup .SuperSelectGroupTitle {
+  display: block;
+  width: 100%;
+  padding: calc(var(--pd) / 2) var(--pd);
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+  background-color: rgba(0, 0, 0, 0.05);
+  font-weight: bold;
+  cursor: default;
+  font-size: 0.85rem;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+}
+.SuperSelect .SuperSelectComp .SuperSelectList .SuperSelectGroup .Option {
+  margin-left: var(--pd);
+}
+.SuperSelect .SuperSelectComp .SuperSelectList .Option input {
+  display: block;
+  width: 100%;
+  position: relative;
+  pointer-events: none;
+  cursor: default;
+  height: 1px;
+  width: 1px;
+  z-index: -1;
+  opacity: 0;
+}
+.SuperSelect .SuperSelectComp .SuperSelectList .Option input:disabled + label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.SuperSelect .SuperSelectComp .SuperSelectList .Option input:hover:not(:disabled) + label {
+  color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
+  background-color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig-soft));
+}
+.SuperSelect .SuperSelectComp .SuperSelectList .Option input:checked + label {
+  font-weight: bold !important;
+  color: hsl(var(--light-hue), var(--light-sat), var(--light-lig)) !important;
+  background-color: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig)) !important;
+}
+
+.SuperSelectMed {
+  height: calc(var(--field-h) * 1.25);
+}
+.SuperSelectMed .SuperSelectLabel {
+  line-height: calc(var(--field-h) * 1.25);
+  padding: 0 calc(var(--pd) * 2);
+  font-size: calc(var(--font-size) * 1.15);
+}
+
+.SuperSelectLarge {
+  height: calc(var(--field-h) * 1.55);
+}
+.SuperSelectLarge .SuperSelectLabel {
+  line-height: calc(var(--field-h) * 1.55);
+  padding: 0 calc(var(--pd) * 2.2);
+  font-size: calc(var(--font-size) * 1.25);
 }
 
 .SuperSelectOpen .SuperSelectComp {
