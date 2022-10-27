@@ -353,6 +353,8 @@ class Modal{
 		this.mouseX = 0;
 		this.mouseY = 0;
 
+		this._centered = false;
+
 		this.calls = [];
 
 		this.data = new Object;
@@ -457,6 +459,8 @@ class Modal{
 
 		this.comp.style.left = this.currentX+'px';
 		this.comp.style.top = this.currentY+'px';
+
+		this._centered = true;
 	}
 
 	initMove(){
@@ -596,9 +600,12 @@ class Modal{
 	open(){
 
 		Debounce(() => {
+
 			this.comp.show();
 
-			this.setCenter();
+			if(this._centered === false){
+				this.setCenter();
+			}
 
 			this._call();
 
@@ -614,6 +621,8 @@ class Modal{
 		this.currentY = 0;
 		this.comp.style.transform = null;
 		this.comp.style.zIndex = null;
+
+		this._centered = false;
 	}
 
 	_call(){
@@ -629,6 +638,41 @@ class Modal{
 		if(typeof(fn) == 'function'){
 
 			this.calls.push(fn);
+		}
+	}
+}
+class Superselect{
+
+	constructor(id){
+
+		this.lastEvent = 'none';
+		
+		if(document.getElementById(id)){
+
+			this.comp = document.getElementById(id);
+
+			this.label = this.comp.querySelector('.SuperSelectLabel');
+
+			this.label.addEventListener('click', (e) => {
+
+				if(this.lastEvent == 'click'){
+
+					this.comp.blur();
+					this.lastEvent = 'blur';
+				}
+
+				this.lastEvent = 'click';
+			});
+
+			this.comp.addEventListener('focus', (e) => {
+
+				this.lastEvent = 'focus';
+			});
+
+			this.comp.addEventListener('focusin', (e) => {
+
+				this.lastEvent = 'focusin';
+			});
 		}
 	}
 }
