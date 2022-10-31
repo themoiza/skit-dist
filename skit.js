@@ -343,6 +343,7 @@ window.LockScreen = {
 
 	mask:  `<span class="LockScreenSpinner"></span>`+`Wait a moment`,
 	timeout:  60000,
+	blur:  false,
 
 	lock: (config) => {
 
@@ -353,8 +354,11 @@ window.LockScreen = {
 			}
 
 			if(config.title){
-
 				LockScreen.mask = `<span class="LockScreenSpinner"></span>`+config.title;
+			}
+
+			if(config.blur && config.blur == true){
+				LockScreen.blur = true;
 			}
 		}
 
@@ -370,6 +374,10 @@ window.LockScreen = {
 
 		document.getElementById('IdLockScreen').style = `animation-duration: `+LockScreen.timeout+`ms`;
 
+		if(config.blur){
+			document.body.style.filter = 'blur(3px)';
+		}
+
 		document.getElementById('IdLockScreen').showModal();
 
 		Debounce(() => {
@@ -379,6 +387,7 @@ window.LockScreen = {
 	unlock: () => {
 
 		document.getElementById('IdLockScreen').close();
+		document.body.style.filter = null;
 
 	}
 };

@@ -9011,7 +9011,7 @@ i[class^=fi-] {
   -o-user-select: none;
 }
 #IdLockScreen::backdrop {
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.5);
 }
 #IdLockScreen::after {
   flex: 0 0 auto;
