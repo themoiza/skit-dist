@@ -341,54 +341,73 @@ window.Dualrange = {
 
 window.LockScreen = {
 
-	mask:  `<span class="LockScreenSpinner"></span>`+`Wait a moment`,
+	/**
+	 * PARAMS
+	 * blur: bool, blur body
+	 * timeout: integer, mili seconds, not required, default 60000, 60 seconds
+	 * spinner: bool
+	 */
+
+	title:  `Wait a moment`,
 	timeout:  60000,
 	blur:  false,
+	spinner: '',
 
 	lock: (config) => {
+
+		var spinner = '';
 
 		if(config){
 
 			if(config.timeout){
 				LockScreen.timeout = config.timeout;
 			}
-
 			if(config.title){
-				LockScreen.mask = `<span class="LockScreenSpinner"></span>`+config.title;
+				LockScreen.title = config.title;
 			}
 
-			if(config.blur && config.blur == true){
+			if(config.blur && config.blur === true){
 				LockScreen.blur = true;
+			}
+
+			if(config.spinner && config.spinner === true){
+				LockScreen.spinner = `<span class="LockScreenSpinner"></span>`;
 			}
 		}
 
 		if(document.getElementById('IdLockScreen')){
+
 			var div = document.getElementById('IdLockScreen');
-			div.innerHTML = LockScreen.mask;
+			div.innerHTML = LockScreen.spinner+LockScreen.title;
+
 		}else{
+
 			var div = document.createElement('dialog');
 			div.setAttribute('id', 'IdLockScreen');
-			div.innerHTML = LockScreen.mask;
+			div.innerHTML = LockScreen.spinner+LockScreen.title;
 			document.body.appendChild(div);
 		}
 
-		document.getElementById('IdLockScreen').style = `animation-duration: `+LockScreen.timeout+`ms`;
 
-		if(config.blur){
+		if(LockScreen.blur){
 			document.body.style.filter = 'blur(3px)';
 		}
 
 		document.getElementById('IdLockScreen').showModal();
 
-		Debounce(() => {
-			LockScreen.unlock();
-		}, LockScreen.timeout, 'IdLockScreen');
+		if(LockScreen.timeout > -1){
+
+			document.getElementById('IdLockScreen').style = `animation-duration: `+LockScreen.timeout+`ms`;
+
+			Debounce(() => {
+				LockScreen.unlock();
+			}, LockScreen.timeout, 'IdLockScreen');
+		}
 	},
 	unlock: () => {
 
 		document.getElementById('IdLockScreen').close();
 		document.body.style.filter = null;
-
 	}
 };
 class Modal{
@@ -449,7 +468,7 @@ class Modal{
 			this.options.html = `
 				<div class="TopBar">
 					<div class="Move">`+this.options.title+`</div>
-					<div class="Close"><button data-skit="close">⨉</button></div>
+					<div class="Close"><button data-skit="close"></button></div>
 				</div>
 				<div class="ModalContent">
 					<div class="pd1">
@@ -733,6 +752,8 @@ class Superselect{
 
 		this.label = 'NONE';
 
+		this.search = true;
+
 		this.searchPlaceholder = 'search';
 
 		this.list = [];
@@ -754,6 +775,10 @@ class Superselect{
 			if(config.list){
 				this.list = config.list;
 			}
+
+			if(typeof(config.search) !== 'undefined' && config.search === false){
+				this.search = false;
+			}
 		}
 
 		this._computedList = this.list;
@@ -772,7 +797,9 @@ class Superselect{
 
 			this.sComp = this.comp.querySelector('.SuperSelectComp');
 
-			this._createSearch();
+			if(this.search){
+				this._createSearch();
+			}
 			this._createList();
 
 			this.searchComp = this.sComp.querySelector('input');
@@ -812,14 +839,25 @@ class Superselect{
 				this.active = e.target;
 			});
 
-			this.searchComp.addEventListener('keyup', (e) => {
+			this.listComp.addEventListener('click', (e) => {
 
-				Debounce(() => {
+				if(e.target.nodeName == 'LABEL'){
 
-					this._filter(e.target.value);
-
-				}, 500, 'superselect'+this.id);
+					this.blur();
+				}
 			});
+
+			if(this.search){
+
+				this.searchComp.addEventListener('keyup', (e) => {
+
+					Debounce(() => {
+
+						this._filter(e.target.value);
+
+					}, 500, 'superselect'+this.id);
+				});
+			}
 
 			this._render();
 			this._load();
@@ -1047,6 +1085,13 @@ class Superselect{
 	focus(){
 		this.comp.focus();
 		this.active.scrollIntoView();
+	}
+
+	blur(){
+
+		this.comp.focus();
+		this.comp.blur();
+		this.lastEvent = 'blur';
 	}
 
 	reset(){
@@ -1336,7 +1381,7 @@ window.Warning = (obj) => {
 					<div class="WarningTitle">`+title+`</div>
 					<div>`+message+`</div>
 				</div>
-				<div><button class="WarningClose">⨉</button></div>
+				<div><button class="WarningClose"></button></div>
 			</div>`;
 
 		// WARNING EXISTS
@@ -1420,7 +1465,7 @@ window.Warning = (obj) => {
 					<div class="WarningTitle">`+title+`</div>
 					<div>`+message+`</div>
 				</div>
-				<div><button class="WarningClose">⨉</button></div>`;
+				<div><button class="WarningClose"></button></div>`;
 		}
 	}
 };

@@ -5,6 +5,9 @@
   --rd: var(--radius);
   --font-size: 0.9rem;
   --field-h: calc(1rem * 2);
+  --close-dark: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmkteCIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBkPSJNNC42NDYgNC42NDZhLjUuNSAwIDAgMSAuNzA4IDBMOCA3LjI5M2wyLjY0Ni0yLjY0N2EuNS41IDAgMCAxIC43MDguNzA4TDguNzA3IDhsMi42NDcgMi42NDZhLjUuNSAwIDAgMS0uNzA4LjcwOEw4IDguNzA3bC0yLjY0NiAyLjY0N2EuNS41IDAgMCAxLS43MDgtLjcwOEw3LjI5MyA4IDQuNjQ2IDUuMzU0YS41LjUgMCAwIDEgMC0uNzA4eiIvPgo8L3N2Zz4=");
+  --close-light: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9ImJpIGJpLXgiIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHBhdGggZD0iTTQuNjQ2IDQuNjQ2YS41LjUgMCAwIDEgLjcwOCAwTDggNy4yOTNsMi42NDYtMi42NDdhLjUuNSAwIDAgMSAuNzA4LjcwOEw4LjcwNyA4bDIuNjQ3IDIuNjQ2YS41LjUgMCAwIDEtLjcwOC43MDhMOCA4LjcwN2wtMi42NDYgMi42NDdhLjUuNSAwIDAgMS0uNzA4LS43MDhMNy4yOTMgOCA0LjY0NiA1LjM1NGEuNS41IDAgMCAxIDAtLjcwOHoiLz4KPC9zdmc+");
+  --close-x: var(--close-dark);
   --clock-picker: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktY2xvY2siIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHBhdGggZD0iTTggMy41YS41LjUgMCAwIDAtMSAwVjlhLjUuNSAwIDAgMCAuMjUyLjQzNGwzLjUgMmEuNS41IDAgMCAwIC40OTYtLjg2OEw4IDguNzFWMy41eiIvPgogIDxwYXRoIGQ9Ik04IDE2QTggOCAwIDEgMCA4IDBhOCA4IDAgMCAwIDAgMTZ6bTctOEE3IDcgMCAxIDEgMSA4YTcgNyAwIDAgMSAxNCAweiIvPgo8L3N2Zz4=");
   --calendar-picker: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktY2FsZW5kYXIiIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHBhdGggZD0iTTMuNSAwYS41LjUgMCAwIDEgLjUuNVYxaDhWLjVhLjUuNSAwIDAgMSAxIDBWMWgxYTIgMiAwIDAgMSAyIDJ2MTFhMiAyIDAgMCAxLTIgMkgyYTIgMiAwIDAgMS0yLTJWM2EyIDIgMCAwIDEgMi0yaDFWLjVhLjUuNSAwIDAgMSAuNS0uNXpNMSA0djEwYTEgMSAwIDAgMCAxIDFoMTJhMSAxIDAgMCAwIDEtMVY0SDF6Ii8+Cjwvc3ZnPg==");
   --mag-glass: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktc2VhcmNoIiB2aWV3Qm94PSIwIDAgMTYgMTYiPgogIDxwYXRoIGQ9Ik0xMS43NDIgMTAuMzQ0YTYuNSA2LjUgMCAxIDAtMS4zOTcgMS4zOThoLS4wMDFjLjAzLjA0LjA2Mi4wNzguMDk4LjExNWwzLjg1IDMuODVhMSAxIDAgMCAwIDEuNDE1LTEuNDE0bC0zLjg1LTMuODVhMS4wMDcgMS4wMDcgMCAwIDAtLjExNS0uMXpNMTIgNi41YTUuNSA1LjUgMCAxIDEtMTEgMCA1LjUgNS41IDAgMCAxIDExIDB6Ii8+Cjwvc3ZnPg==");
@@ -13,6 +16,7 @@
 }
 
 .DarkMode {
+  --close-x: var(--close-light);
   --clock-picker: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9ImJpIGJpLWNsb2NrIiB2aWV3Qm94PSIwIDAgMTYgMTYiPgogIDxwYXRoIGQ9Ik04IDMuNWEuNS41IDAgMCAwLTEgMFY5YS41LjUgMCAwIDAgLjI1Mi40MzRsMy41IDJhLjUuNSAwIDAgMCAuNDk2LS44NjhMOCA4LjcxVjMuNXoiLz4KICA8cGF0aCBkPSJNOCAxNkE4IDggMCAxIDAgOCAwYTggOCAwIDAgMCAwIDE2em03LThBNyA3IDAgMSAxIDEgOGE3IDcgMCAwIDEgMTQgMHoiLz4KPC9zdmc+");
   --calendar-picker: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9ImJpIGJpLWNhbGVuZGFyIiB2aWV3Qm94PSIwIDAgMTYgMTYiPgogIDxwYXRoIGQ9Ik0zLjUgMGEuNS41IDAgMCAxIC41LjVWMWg4Vi41YS41LjUgMCAwIDEgMSAwVjFoMWEyIDIgMCAwIDEgMiAydjExYTIgMiAwIDAgMS0yIDJIMmEyIDIgMCAwIDEtMi0yVjNhMiAyIDAgMCAxIDItMmgxVi41YS41LjUgMCAwIDEgLjUtLjV6TTEgNHYxMGExIDEgMCAwIDAgMSAxaDEyYTEgMSAwIDAgMCAxLTFWNEgxeiIvPgo8L3N2Zz4=");
   --mag-glass: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iI2ZmZmZmZiIgY2xhc3M9ImJpIGJpLXNlYXJjaCIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBkPSJNMTEuNzQyIDEwLjM0NGE2LjUgNi41IDAgMSAwLTEuMzk3IDEuMzk4aC0uMDAxYy4wMy4wNC4wNjIuMDc4LjA5OC4xMTVsMy44NSAzLjg1YTEgMSAwIDAgMCAxLjQxNS0xLjQxNGwtMy44NS0zLjg1YTEuMDA3IDEuMDA3IDAgMCAwLS4xMTUtLjF6TTEyIDYuNWE1LjUgNS41IDAgMSAxLTExIDAgNS41IDUuNSAwIDAgMSAxMSAweiIvPgo8L3N2Zz4=");
@@ -247,7 +251,7 @@ i[class^=fi-] {
 }
 
 .Card {
-  background-color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
   display: block;
   width: 100%;
   box-sizing: border-box;
@@ -257,6 +261,10 @@ i[class^=fi-] {
   color: hsl(var(--background-hue), var(--background-sat), var(--background-lig-soft));
   font-weight: bold;
   font-size: 16px;
+}
+
+.CardBorder {
+  border: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
 }
 
 /* DARK MODE */
@@ -9083,9 +9091,11 @@ i[class^=fi-] {
   width: 100%;
   border: none;
   outline: none;
-  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   background-color: transparent;
-  font-size: 1.4rem;
+  background-image: var(--close-x);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: var(--field-h) var(--field-h);
   cursor: pointer;
 }
 .Modal .ModalContent {
@@ -9368,8 +9378,8 @@ table tbody tr:hover {
   align-items: flex-start;
   justify-content: space-between;
   font-size: 0.75rem;
-  color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
-  background-color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
   margin: 0.5rem auto;
   width: 100%;
   padding: var(--pd);
@@ -9393,16 +9403,13 @@ table tbody tr:hover {
   border-radius: 50%;
   width: 1.8rem;
   height: 1.8rem;
-  line-height: 1.5rem;
-  font-size: 1.3rem;
   padding: 0 !important;
   margin: 0;
-  color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
-  background-color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
-}
-#Warning .WarningCanvas .Warning .WarningClose:hover {
-  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
-  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+  background-color: transparent;
+  background-image: var(--close-x);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 1.8rem 1.8rem;
 }
 #Warning .WarningCanvas .Warning::after {
   flex: 0 0 auto;
@@ -9422,48 +9429,28 @@ table tbody tr:hover {
   background-color: hsl(var(--danger-hue), var(--danger-sat), var(--danger-lig));
 }
 #Warning .WarningCanvas .WarningDanger .WarningClose {
-  color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
-  background-color: hsl(var(--danger-hue), var(--danger-sat), var(--danger-lig));
-}
-#Warning .WarningCanvas .WarningDanger .WarningClose:hover {
-  color: hsl(var(--danger-hue), var(--danger-sat), var(--danger-lig));
-  background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
+  background-image: var(--close-light);
 }
 #Warning .WarningCanvas .WarningPri {
   color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
   background-color: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
 }
 #Warning .WarningCanvas .WarningPri .WarningClose {
-  color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
-  background-color: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
-}
-#Warning .WarningCanvas .WarningPri .WarningClose:hover {
-  color: hsl(var(--pri-hue), var(--pri-sat), var(--pri-lig));
-  background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
+  background-image: var(--close-light);
 }
 #Warning .WarningCanvas .WarningSec {
   color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
   background-color: hsl(var(--sec-hue), var(--sec-sat), var(--sec-lig));
 }
 #Warning .WarningCanvas .WarningSec .WarningClose {
-  color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
-  background-color: hsl(var(--sec-hue), var(--sec-sat), var(--sec-lig));
-}
-#Warning .WarningCanvas .WarningSec .WarningClose:hover {
-  color: hsl(var(--sec-hue), var(--sec-sat), var(--sec-lig));
-  background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
+  background-image: var(--close-light);
 }
 #Warning .WarningCanvas .WarningDark {
   color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
   background-color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
 }
 #Warning .WarningCanvas .WarningDark .WarningClose {
-  color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
-  background-color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
-}
-#Warning .WarningCanvas .WarningDark .WarningClose:hover {
-  color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
-  background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
+  background-image: var(--close-light);
 }
 #Warning .WarningCanvas .WarningDark::after {
   background-color: rgba(255, 255, 255, 0.5);
@@ -9473,12 +9460,7 @@ table tbody tr:hover {
   background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
 }
 #Warning .WarningCanvas .WarningLight .WarningClose {
-  color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
-  background-color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
-}
-#Warning .WarningCanvas .WarningLight .WarningClose:hover {
-  color: hsl(var(--light-hue), var(--light-sat), var(--light-lig));
-  background-color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
+  background-image: var(--close-dark);
 }
 
 .WarningLeftBottom {
