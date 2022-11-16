@@ -1,4 +1,22 @@
-window.Confirm = function(obj){
+window.Skit = {
+
+	setConfig(c){
+
+	},
+
+	hasLoadLockScreen(){
+		return false;
+	},
+
+	hasPlusAnimations(){
+		return true;
+	}
+};
+
+if(typeof(SkitConfig) == 'undefined'){
+	Skit.setConfig({});
+}
+window.Confirm = (obj) => {
 
 	if(obj.ok){
 
@@ -13,7 +31,7 @@ window.Confirm = function(obj){
 				`+message+`
 			</div>
 			<div class="ConfirmActions">
-				<button id="Confirm-ok" class="`+obj.okclass+`">`+obj.ok+`</button>
+				<button id="Confirm-ok" class="`+obj.okClass+`">`+obj.ok+`</button>
 			</div>`;
 
 		if(obj.no !== false){
@@ -24,7 +42,7 @@ window.Confirm = function(obj){
 					`+message+`
 				</div>
 				<div class="ConfirmActions">
-					<button id="Confirm-ok" class="`+obj.okclass+`">`+obj.ok+`</button> <button id="Confirm-no" class="`+obj.noclass+`">`+obj.no+`</button> 
+					<button id="Confirm-ok" class="`+obj.okClass+`">`+obj.ok+`</button> <button id="Confirm-no" class="`+obj.noClass+`">`+obj.no+`</button> 
 				</div>`;
 		}
 
@@ -52,8 +70,8 @@ window.Confirm = function(obj){
 				document.getElementById('Confirm').close();
 				document.body.classList.remove('NoScroll');
 
-				if(obj.cancelFn){
-					obj.cancelFn();
+				if(obj.bdFn){
+					obj.bdFn();
 				}
 			}
 		});
@@ -81,25 +99,28 @@ window.Confirm = function(obj){
 			}
 		});
 
-		document.getElementById('Confirm-no').addEventListener('click', (e) => {
+		if(document.getElementById('Confirm-no')){
 
-			document.getElementById('Confirm').close();
-			document.body.classList.remove('NoScroll');
-
-			if(obj.noFn){
-				obj.noFn();
-			}
-		});
-
-		document.getElementById('Confirm-no').addEventListener('keyup', (e) => {
-
-			if(e.keyCode == 13){
-
+			document.getElementById('Confirm-no').addEventListener('click', (e) => {
+	
 				document.getElementById('Confirm').close();
 				document.body.classList.remove('NoScroll');
-				obj.noFn();
-			}
-		});
+	
+				if(obj.noFn){
+					obj.noFn();
+				}
+			});
+	
+			document.getElementById('Confirm-no').addEventListener('keyup', (e) => {
+	
+				if(e.keyCode == 13){
+	
+					document.getElementById('Confirm').close();
+					document.body.classList.remove('NoScroll');
+					obj.noFn();
+				}
+			});
+		}
 	}
 };
 
@@ -338,6 +359,34 @@ window.Dualrange = {
 		return [min, max];
 	}
 };
+if(document.getElementById('idLoadLockScreen') && Skit.hasLoadLockScreen()){
+
+	var el = document.getElementById('idLoadLockScreen');
+
+	document.addEventListener('DOMContentLoaded', () => {
+		document.body.classList.add('NoScroll');
+
+		window.setTimeout(() => {
+			el.classList.add('LoadLockScreenIn');
+			document.body.classList.remove('NoScroll');
+		}, 1000);
+	});
+
+	window.addEventListener('beforeunload', (e) => {
+
+		window.requestAnimationFrame(() => {
+			el.classList.remove('LoadLockScreenIn');
+			el.classList.add('LoadLockScreenOut');
+			document.body.classList.add('NoScroll');
+		});
+	});
+}
+
+if(document.getElementById('idLoadLockScreen') && !Skit.hasLoadLockScreen()){
+
+	var el = document.getElementById('idLoadLockScreen');
+	el.parentNode.removeChild(el);
+}
 
 window.LockScreen = {
 
@@ -711,6 +760,28 @@ class Modal{
 		}
 	}
 }
+window.Panic = {
+
+};
+window.StateLoading = {
+
+	setPercentage(p){
+
+		idStateLoading.style.width = p+'vw';
+
+		Debounce(() => {
+
+			if(p < 100){
+				idStateLoading.style.height = null;
+			}
+
+			if(p == 100){
+				idStateLoading.style.height = '0px';
+			}
+
+		}, 1500, 'StateLoading');
+	}
+};
 /**
  * SUPER SELECT
  * 
