@@ -1,5 +1,7 @@
 window.Skit = {
 
+	virtualTop: 0,
+
 	setConfig(c){
 
 	},
@@ -451,6 +453,10 @@ window.LockScreen = {
 			Debounce(() => {
 				LockScreen.unlock();
 			}, LockScreen.timeout, 'IdLockScreen');
+
+		}else{
+
+			document.getElementById('IdLockScreen').style = null;
 		}
 	},
 	unlock: () => {
@@ -760,8 +766,188 @@ class Modal{
 		}
 	}
 }
+class Pagination{
+
+	constructor(ids){
+
+		this.currentPage = 1;
+		this.byPage = 100;
+		this.totalData = 317960;
+		this.totalPages = Number((this.totalData / this.byPage).toFixed(0));
+
+		this.comp = [];
+		this.left = [];
+		this.right = [];
+		this.all = [];
+
+		this.fn = false;
+
+		ids.forEach((id, i) => {
+
+			if(document.getElementById(id)){
+
+				this.comp[i] = document.getElementById(id);
+
+				if(this.comp[i].querySelector('.PagLeft')){
+					this.left[i] = this.comp[i].querySelector('.PagLeft');
+				}
+
+				if(this.comp[i].querySelector('.PagAll')){
+					this.all[i] = this.comp[i].querySelector('.PagAll');
+				}
+
+				if(this.comp[i].querySelector('.PagRight')){
+					this.right[i] = this.comp[i].querySelector('.PagRight');
+				}
+			}
+
+			if(this.left[i]){
+
+				this.left[i].addEventListener('click', (e) => {
+
+					if(e.ctrlKey && e.shiftKey){
+
+						this.previous(1000);
+
+					}else if(e.ctrlKey){
+
+						this.previous(100);
+
+					}else if(e.shiftKey){
+
+						this.previous(10);
+
+					}else{
+
+						this.previous(1);
+					}
+				});
+			}
+
+			if(this.right[i]){
+
+				this.right[i].addEventListener('click', (e) => {
+
+					if(e.ctrlKey && e.shiftKey){
+
+						this.next(1000);
+
+					}else if(e.ctrlKey){
+
+						this.next(100);
+
+					}else if(e.shiftKey){
+
+						this.next(10);
+
+					}else{
+
+						this.next(1);
+					}
+				});
+			}
+
+			if(this.all[i]){
+
+				this.all[i].addEventListener('click', (e) => {
+
+					console.log('all');
+				});
+			}
+		});
+
+		this.setPage(1);
+	}
+
+	setCallBack(fn){
+		this.fn = fn;
+	}
+
+	previous(n){
+
+		if(this.currentPage - n >= 1){
+			this.currentPage = Number(this.currentPage) - n;
+		}
+
+		this.setPage(this.currentPage);
+	}
+
+	next(n){
+
+		if(this.currentPage + n <= this.totalPages){
+			this.currentPage = Number(this.currentPage) + n;
+		}
+
+		this.setPage(this.currentPage);
+	}
+
+	setPage(p){
+
+		this.all.forEach((all, i) => {
+
+			this.all[i].textContent = this.currentPage+' de '+this.totalPages+', '+this.totalData;
+		});
+
+		if(this.fn && typeof(this.fn) === 'function'){
+
+			Debounce(() => {
+
+				let fn = this.fn;
+				fn();
+
+			}, 200, 'pagination');
+		}
+	}
+
+	setTotal(t){
+
+		this.totalData = Number(t);
+		this.totalPages = Number((this.totalData / this.byPage).toFixed(0));
+
+		this.setPage(this.currentPage);
+	}
+
+	getByPage(){
+
+		return this.byPage;
+	}
+
+	getPage(){
+
+		return this.currentPage;
+	}
+}
 window.Panic = {
 
+	start(){
+
+		document.body.classList.add('InPanic');
+
+		Skit.virtualTop = 50;
+
+		if(!document.getElementById('InPanic')){
+
+			var p = document.createElement('div');
+			p.setAttribute('id', 'InPanic');
+			p.setAttribute('class', 'Panic');
+			document.body.appendChild(p);
+		}else{
+
+			var p = document.getElementById('InPanic');
+		}
+		p.textContent = 'Estamos trabalhando para resolver os problemas...';
+	},
+	stop(){
+
+		Skit.virtualTop = 0;
+
+		document.body.classList.remove('InPanic');
+
+		if(document.getElementById('InPanic')){
+			var p = document.getElementById('InPanic');
+			p.parentNode.removeChild(p);
+		}
+	}
 };
 window.StateLoading = {
 
@@ -1293,7 +1479,9 @@ window.Tooltip = {
 
 			var position = e.target.getAttribute('data-title-position') ?? 'top';
 
-			var top = (rect.top - tip.clientHeight - 15).toFixed(0);
+			var virtualTop = Skit.virtualTop ?? 0;
+
+			var top = (rect.top - Number(virtualTop) - tip.clientHeight - 15).toFixed(0);
 			var left = (rect.left+(rect.width / 2)-(tip.clientWidth / 2)).toFixed(0);
 
 			if(top < 5 || position == 'bottom'){
