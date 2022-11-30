@@ -772,7 +772,7 @@ class Pagination{
 
 		this.currentPage = 1;
 		this.byPage = 100;
-		this.totalData = 317960;
+		this.totalData = 0;
 		this.totalPages = Number((this.totalData / this.byPage).toFixed(0));
 
 		this.comp = [];
@@ -863,24 +863,6 @@ class Pagination{
 		this.fn = fn;
 	}
 
-	previous(n){
-
-		if(this.currentPage - n >= 1){
-			this.currentPage = Number(this.currentPage) - n;
-		}
-
-		this.setPage(this.currentPage);
-	}
-
-	next(n){
-
-		if(this.currentPage + n <= this.totalPages){
-			this.currentPage = Number(this.currentPage) + n;
-		}
-
-		this.setPage(this.currentPage);
-	}
-
 	setPage(p){
 
 		this.all.forEach((all, i) => {
@@ -899,6 +881,12 @@ class Pagination{
 		}
 	}
 
+	setByPage(p){
+
+		this.byPage = Number(p);
+		this.setPage(this.currentPage);
+	}
+
 	setTotal(t){
 
 		this.totalData = Number(t);
@@ -907,9 +895,32 @@ class Pagination{
 		this.setPage(this.currentPage);
 	}
 
+	previous(n){
+
+		if(this.currentPage - n >= 1){
+			this.currentPage = Number(this.currentPage) - n;
+		}
+
+		this.setPage(this.currentPage);
+	}
+
+	next(n){
+
+		if(this.currentPage + n <= this.totalPages){
+			this.currentPage = Number(this.currentPage) + n;
+		}
+
+		this.setPage(this.currentPage);
+	}
+
 	getByPage(){
 
 		return this.byPage;
+	}
+
+	getTotal(){
+
+		return this.totalData;
 	}
 
 	getPage(){

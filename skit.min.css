@@ -12085,6 +12085,16 @@ i[class^=fi-] {
   max-width: 1000ch;
 }
 
+@media all and (max-width: 1023px) {
+  .Flex {
+    flex-direction: column;
+  }
+  *[class*=ColFlex] {
+    width: 100% !important;
+    padding-left: calc(var(--pd) * 1.5) !important;
+    padding-right: calc(var(--pd) * 1.5) !important;
+  }
+}
 .Info {
   color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
   background-color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
