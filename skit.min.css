@@ -137,21 +137,24 @@ i[class^=fi-] {
 }
 
 .BtnTiny {
-  font-size: calc(var(--font-size) * 0.65);
   height: calc(var(--field-h) * 0.7);
+  line-height: calc(var(--field-h) * 0.7);
+  font-size: calc(var(--font-size) * 0.7);
   padding: 0 calc(var(--pd));
 }
 
 .BtnMed {
-  font-size: calc(var(--font-size) * 1.15);
   height: calc(var(--field-h) * 1.25);
+  line-height: calc(var(--field-h) * 1.25);
+  font-size: calc(var(--font-size) * 1.15);
   padding: 0 calc(var(--pd) * 2);
 }
 
 .BtnLarge {
-  font-size: calc(var(--font-size) * 1.25);
-  height: calc(var(--field-h) * 1.55);
-  padding: 0 calc(var(--pd) * 2.2);
+  height: calc(var(--field-h) * 1.6);
+  line-height: calc(var(--field-h) * 1.6);
+  font-size: calc(var(--font-size) * 1.4);
+  padding: 0 calc(var(--pd) * 2);
 }
 
 .BtnPri {
@@ -241,6 +244,24 @@ i[class^=fi-] {
 }
 .BtnTrans:active {
   box-shadow: 0 0 0 2px hsl(var(--foreground-hue) var(--foreground-sat) var(--foreground-lig)/60%);
+}
+
+.BtnInv {
+  background-color: transparent;
+  box-shadow: none;
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+}
+.BtnInv:focus {
+  box-shadow: none;
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+}
+.BtnInv:hover {
+  box-shadow: none;
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+}
+.BtnInv:active {
+  box-shadow: none;
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
 }
 
 .BtnJoinLeft {
@@ -13227,36 +13248,72 @@ i[class^=fi-] {
   font-size: 0.9rem;
 }
 
-table {
+.Table {
   width: 100%;
   border-collapse: collapse;
 }
-table thead {
+.Table thead {
   background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
 }
-table thead th {
+.Table thead th {
   color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   border: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
   padding: 0.5rem 0.75rem;
   font-weight: bold;
   font-size: 0.9rem;
 }
-table tbody {
+.Table tbody {
   background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
 }
-table tbody tr:nth-child(even) {
+.Table tbody tr:nth-child(even) {
   background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
 }
-table tbody tr:nth-child(odd) {
+.Table tbody tr:nth-child(odd) {
   background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
 }
-table tbody td {
+.Table tbody td {
   color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   border: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
   padding: 0.5rem 0.75rem;
   font-size: 0.85rem;
 }
-table tbody tr:hover {
+.Table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.GridTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+.GridTable thead {
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+}
+.GridTable thead th {
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+  border: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
+  padding: 0.6rem;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+.GridTable thead .GridTableActions {
+  width: 6rem;
+}
+.GridTable tbody {
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+}
+.GridTable tbody tr:nth-child(even) {
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+}
+.GridTable tbody tr:nth-child(odd) {
+  background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
+}
+.GridTable tbody td {
+  color: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+  border: 1px solid hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig-soft));
+  padding: 0.6rem;
+  font-size: 0.8rem;
+}
+.GridTable tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.08);
 }
 
