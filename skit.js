@@ -147,9 +147,19 @@ window.Confirm = (obj) => {
 		}
 	}
 };
+/**
+ * COPY
+ * 
+ * REQUISITOS
+ * - SER O MAIS NATIVO POSSÍVEL
+ * - Copiar partes texto em código HTML.
+ * - Copiar selecionando por um ID
+ * - Copiar uma string
+ */
 
 window.Copy = {
 
+	// COPY BY ID ELEMENT
 	id: (id) => {
 
 		if(document.getElementById(id)){
@@ -172,6 +182,7 @@ window.Copy = {
 		}
 	},
 
+	// COPY STRING
 	string: (t) => {
 
 		var tx = document.createElement('textarea');
@@ -2165,8 +2176,6 @@ window.Warning = (obj) => {
 			// prevent xss
 			id = encodeURIComponent(obj.id);
 		}
-
-		console.log(id);
 
 		// VALIDATE COLORS
 		if(colors.includes(color)){
