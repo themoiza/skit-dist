@@ -100,6 +100,7 @@ i[class^=fi-] {
 .Btn {
   cursor: pointer;
   position: relative;
+  display: inline-block;
   font-weight: normal;
   text-align: center;
   border: none;
@@ -139,7 +140,7 @@ i[class^=fi-] {
 .BtnTiny {
   height: calc(var(--field-h) * 0.7);
   line-height: calc(var(--field-h) * 0.7);
-  font-size: calc(var(--font-size) * 0.7);
+  font-size: calc(var(--font-size) * 0.9);
   padding: 0 calc(var(--pd));
 }
 
@@ -12328,42 +12329,42 @@ i[class^=fi-] {
   top: 0;
   left: 0;
   line-height: calc(var(--field-h) - 0.3rem);
-  font-family: var(--font-family);
+  font-family: monospace !important;
   font-style: normal !important;
   font-size: var(--field-h);
 }
 .field .Radio::before {
   content: "○"; /*○●*/
   line-height: calc(var(--field-h) - 0.3rem);
-  font-family: var(--font-family);
+  font-family: monospace !important;
   font-style: normal !important;
   font-size: var(--field-h);
 }
 .field .Checkbox::before {
   content: "□"; /*□▣*/
   line-height: calc(var(--field-h) - 0.3rem);
-  font-family: var(--font-family);
+  font-family: monospace !important;
   font-style: normal !important;
   font-size: var(--field-h);
 }
 .field .Radio:checked:before {
   content: "●";
   line-height: calc(var(--field-h) - 0.3rem);
-  font-family: var(--font-family);
+  font-family: monospace !important;
   font-style: normal !important;
   font-size: var(--field-h);
 }
 .field .Checkbox:checked::before {
   content: "▣";
   line-height: calc(var(--field-h) - 0.3rem);
-  font-family: var(--font-family);
+  font-family: monospace !important;
   font-style: normal !important;
   font-size: var(--field-h);
 }
 .field .Checkbox:indeterminate::before {
   content: "◫";
   line-height: calc(var(--field-h) - 0.3rem);
-  font-family: var(--font-family);
+  font-family: monospace !important;
   font-style: normal !important;
   font-size: var(--field-h);
 }
@@ -12435,6 +12436,17 @@ i[class^=fi-] {
 }
 .field input:read-only:not(:disabled), .field textarea:read-only:not(:disabled) {
   font-style: italic;
+}
+
+.field-tiny input[type=color], .field-tiny input[type=date], .field-tiny input[type=datetime-local], .field-tiny input[type=month], .field-tiny input[type=email], .field-tiny input[type=file], .field-tiny input[type=password], .field-tiny input[type=search], .field-tiny input[type=time], .field-tiny input[type=url], .field-tiny input[type=week], .field-tiny input[type=number], .field-tiny input[type=text], .field-tiny input[type=tel], .field-tiny select {
+  font-size: calc(var(--font-size) * 0.75);
+  height: calc(var(--field-h) * 0.75);
+  padding: var(--pd);
+}
+.field-tiny .Checkbox, .field-tiny .Radio, .field-tiny .Checkbox::before, .field-tiny .Radio::before, .field-tiny .Checkbox:checked::before, .field-tiny .Radio:checked::before {
+  font-size: calc(var(--field-h) * 0.75) !important;
+  height: calc(var(--field-h) * 0.75) !important;
+  line-height: calc(var(--field-h) - 0.5rem) !important;
 }
 
 .field-med input[type=color], .field-med input[type=date], .field-med input[type=datetime-local], .field-med input[type=month], .field-med input[type=email], .field-med input[type=file], .field-med input[type=password], .field-med input[type=search], .field-med input[type=time], .field-med input[type=url], .field-med input[type=week], .field-med input[type=number], .field-med input[type=text], .field-med input[type=tel], .field-med select {
@@ -12537,9 +12549,12 @@ i[class^=fi-] {
 }
 .field .Dualrange input[type=range] {
   appearance: none;
+  left: 0;
+  right: 0;
   position: absolute;
-  top: calc(var(--field-h) / 2 - 1px);
   z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   pointer-events: none;
   outline: none;
@@ -12547,48 +12562,35 @@ i[class^=fi-] {
   margin: 0;
   padding: 0;
   width: 100%;
+  cursor: inherit;
 }
 .field .Dualrange input[type=range]::-webkit-slider-runnable-track, .field .Dualrange input[type=range]::-webkit-slider-thumb {
   appearance: none;
   background-color: transparent;
 }
 .field .Dualrange input[type=range]::-webkit-slider-thumb {
+  height: calc(var(--field-h) / 1.5);
+  width: calc(var(--field-h) / 1.5);
   appearance: none;
   box-shadow: none;
   cursor: inherit;
-  height: calc(var(--field-h) / 1.5);
-  width: calc(var(--field-h) / 1.5);
   border-radius: 50%;
   border: 2px solid hsl(var(--background-hue), var(--background-sat), var(--background-lig));
   background: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   pointer-events: auto;
   z-index: 1;
-  margin-top: calc(var(--field-h) / 4 * -1);
-  transform: translateY(-1px);
 }
 .field .Dualrange input[type=range]::-moz-range-thumb {
+  height: calc(var(--field-h) / 1.9);
+  width: calc(var(--field-h) / 1.9);
   appearance: none;
   box-shadow: none;
   cursor: inherit;
-  height: calc(var(--field-h) / 1.5);
-  width: calc(var(--field-h) / 1.5);
   border-radius: 50%;
   border: 2px solid hsl(var(--background-hue), var(--background-sat), var(--background-lig));
   background: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   pointer-events: auto;
   z-index: 1;
-  margin-top: calc(var(--field-h) / 4 * -1);
-  transform: translateY(-1px);
-}
-.field .Dualrange input[type=range]:first-child {
-  left: 0;
-  right: 0;
-  cursor: inherit;
-}
-.field .Dualrange input[type=range]:last-child {
-  left: 0;
-  right: 0;
-  cursor: inherit;
 }
 .field .Dualrange:hover {
   cursor: pointer;
@@ -12604,70 +12606,76 @@ i[class^=fi-] {
 }
 
 .field .Range {
-  border: none;
-  appearance: none;
-  margin: 0;
-  padding: 0;
+  position: relative;
   display: block;
-  font-family: var(--font-family);
-  font-size: var(--font-size);
-  color: hsl(var(--dark-hue), var(--dark-sat), var(--dark-lig));
-  background-color: transparent;
-  width: inherit;
   height: var(--field-h);
-  min-width: 1rem;
-  outline: none;
-  cursor: pointer;
+  min-width: 3rem;
+  width: inherit;
   touch-action: none;
 }
-.field .Range:focus {
+.field .Range::before {
+  content: "";
+  width: 100%;
+  height: 3px;
+  background: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
+  z-index: 0;
+  position: absolute;
+  left: 0;
+  top: calc(var(--field-h) / 2);
+  transform: translateY(-1px);
+  border-radius: var(--rd);
+  cursor: inherit;
+}
+.field .Range input[type=range] {
+  appearance: none;
+  left: 0;
+  right: 0;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  pointer-events: none;
   outline: none;
-}
-.field .Range::-webkit-slider-runnable-track {
-  width: 100%;
-  box-shadow: none;
-  background: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
-  border-radius: var(--rd);
   border: none;
-  height: 3px;
-}
-.field .Range::-moz-range-track {
+  margin: 0;
+  padding: 0;
   width: 100%;
-  box-shadow: none;
-  background: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
-  border-radius: var(--rd);
-  border: none;
-  height: 3px;
+  cursor: inherit;
 }
-.field .Range::-webkit-slider-thumb {
+.field .Range input[type=range]::-webkit-slider-runnable-track, .field .Range input[type=range]::-webkit-slider-thumb {
+  appearance: none;
+  background-color: transparent;
+}
+.field .Range input[type=range]::-webkit-slider-thumb {
+  height: calc(var(--field-h) / 1.5);
+  width: calc(var(--field-h) / 1.5);
   appearance: none;
   box-shadow: none;
   cursor: inherit;
-  height: calc(var(--field-h) / 1.5);
-  width: calc(var(--field-h) / 1.5);
   border-radius: 50%;
   border: 2px solid hsl(var(--background-hue), var(--background-sat), var(--background-lig));
   background: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   pointer-events: auto;
   z-index: 1;
-  margin-top: calc(var(--field-h) / 4 * -1);
 }
-.field .Range::-moz-range-thumb {
+.field .Range input[type=range]::-moz-range-thumb {
+  height: calc(var(--field-h) / 1.9);
+  width: calc(var(--field-h) / 1.9);
   appearance: none;
   box-shadow: none;
   cursor: inherit;
-  height: calc(var(--field-h) / 1.5);
-  width: calc(var(--field-h) / 1.5);
   border-radius: 50%;
   border: 2px solid hsl(var(--background-hue), var(--background-sat), var(--background-lig));
   background: hsl(var(--foreground-hue), var(--foreground-sat), var(--foreground-lig));
   pointer-events: auto;
   z-index: 1;
-  margin-top: calc(var(--field-h) / 4 * -1);
 }
-.field .Range:disabled {
-  opacity: 0.5;
-  cursor: not-allowed !important;
+.field .Range:hover {
+  cursor: pointer;
+}
+.field .Range:disabled:hover, .field .Range:disabled::before {
+  cursor: not-allowed;
 }
 
 .SuperSelect {
@@ -13201,7 +13209,7 @@ i[class^=fi-] {
   box-shadow: 0px 0px 5px 2px hsl(var(--dark-hue) var(--dark-sat) var(--dark-lig)/5%);
   border: none;
   outline: none;
-  min-width: 30rem;
+  min-width: 15rem;
   background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
   border-radius: var(--rd);
   z-index: 11;
@@ -13514,7 +13522,7 @@ i[class^=fi-] {
   width: 1rem;
   height: 1rem;
   position: absolute;
-  z-index: 5;
+  z-index: 9996;
   transform: translate(calc(var(--triangle-size) * -1), calc(var(--triangle-size) - 1px));
   border-style: solid;
   border-width: var(--triangle-size) var(--triangle-size) 0 var(--triangle-size);
@@ -13559,7 +13567,7 @@ i[class^=fi-] {
 
 .TooltipActive {
   transform: scale(1);
-  z-index: 5;
+  z-index: 9996;
   opacity: 1;
   transition: transform 0.15s ease-in-out, opacity 0.15s ease-in-out;
 }

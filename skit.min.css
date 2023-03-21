@@ -100,6 +100,7 @@ i[class^=fi-] {
 .Btn {
   cursor: pointer;
   position: relative;
+  display: inline-block;
   font-weight: normal;
   text-align: center;
   border: none;
@@ -139,7 +140,7 @@ i[class^=fi-] {
 .BtnTiny {
   height: calc(var(--field-h) * 0.7);
   line-height: calc(var(--field-h) * 0.7);
-  font-size: calc(var(--font-size) * 0.7);
+  font-size: calc(var(--font-size) * 0.9);
   padding: 0 calc(var(--pd));
 }
 
@@ -12328,42 +12329,42 @@ i[class^=fi-] {
   top: 0;
   left: 0;
   line-height: calc(var(--field-h) - 0.3rem);
-  font-family: var(--font-family);
+  font-family: monospace !important;
   font-style: normal !important;
   font-size: var(--field-h);
 }
 .field .Radio::before {
   content: "○"; /*○●*/
   line-height: calc(var(--field-h) - 0.3rem);
-  font-family: var(--font-family);
+  font-family: monospace !important;
   font-style: normal !important;
   font-size: var(--field-h);
 }
 .field .Checkbox::before {
   content: "□"; /*□▣*/
   line-height: calc(var(--field-h) - 0.3rem);
-  font-family: var(--font-family);
+  font-family: monospace !important;
   font-style: normal !important;
   font-size: var(--field-h);
 }
 .field .Radio:checked:before {
   content: "●";
   line-height: calc(var(--field-h) - 0.3rem);
-  font-family: var(--font-family);
+  font-family: monospace !important;
   font-style: normal !important;
   font-size: var(--field-h);
 }
 .field .Checkbox:checked::before {
   content: "▣";
   line-height: calc(var(--field-h) - 0.3rem);
-  font-family: var(--font-family);
+  font-family: monospace !important;
   font-style: normal !important;
   font-size: var(--field-h);
 }
 .field .Checkbox:indeterminate::before {
   content: "◫";
   line-height: calc(var(--field-h) - 0.3rem);
-  font-family: var(--font-family);
+  font-family: monospace !important;
   font-style: normal !important;
   font-size: var(--field-h);
 }
@@ -12435,6 +12436,17 @@ i[class^=fi-] {
 }
 .field input:read-only:not(:disabled), .field textarea:read-only:not(:disabled) {
   font-style: italic;
+}
+
+.field-tiny input[type=color], .field-tiny input[type=date], .field-tiny input[type=datetime-local], .field-tiny input[type=month], .field-tiny input[type=email], .field-tiny input[type=file], .field-tiny input[type=password], .field-tiny input[type=search], .field-tiny input[type=time], .field-tiny input[type=url], .field-tiny input[type=week], .field-tiny input[type=number], .field-tiny input[type=text], .field-tiny input[type=tel], .field-tiny select {
+  font-size: calc(var(--font-size) * 0.75);
+  height: calc(var(--field-h) * 0.75);
+  padding: var(--pd);
+}
+.field-tiny .Checkbox, .field-tiny .Radio, .field-tiny .Checkbox::before, .field-tiny .Radio::before, .field-tiny .Checkbox:checked::before, .field-tiny .Radio:checked::before {
+  font-size: calc(var(--field-h) * 0.75) !important;
+  height: calc(var(--field-h) * 0.75) !important;
+  line-height: calc(var(--field-h) - 0.5rem) !important;
 }
 
 .field-med input[type=color], .field-med input[type=date], .field-med input[type=datetime-local], .field-med input[type=month], .field-med input[type=email], .field-med input[type=file], .field-med input[type=password], .field-med input[type=search], .field-med input[type=time], .field-med input[type=url], .field-med input[type=week], .field-med input[type=number], .field-med input[type=text], .field-med input[type=tel], .field-med select {
@@ -13201,7 +13213,7 @@ i[class^=fi-] {
   box-shadow: 0px 0px 5px 2px hsl(var(--dark-hue) var(--dark-sat) var(--dark-lig)/5%);
   border: none;
   outline: none;
-  min-width: 30rem;
+  min-width: 15rem;
   background-color: hsl(var(--background-hue), var(--background-sat), var(--background-lig));
   border-radius: var(--rd);
   z-index: 11;
@@ -13514,7 +13526,7 @@ i[class^=fi-] {
   width: 1rem;
   height: 1rem;
   position: absolute;
-  z-index: 5;
+  z-index: 9996;
   transform: translate(calc(var(--triangle-size) * -1), calc(var(--triangle-size) - 1px));
   border-style: solid;
   border-width: var(--triangle-size) var(--triangle-size) 0 var(--triangle-size);
@@ -13559,7 +13571,7 @@ i[class^=fi-] {
 
 .TooltipActive {
   transform: scale(1);
-  z-index: 5;
+  z-index: 9996;
   opacity: 1;
   transition: transform 0.15s ease-in-out, opacity 0.15s ease-in-out;
 }

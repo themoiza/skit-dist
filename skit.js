@@ -804,7 +804,6 @@ class Modal{
 window.pages = new Object;
 window.currentPage = '/';
 window.classes = new Object;
-window.listenPopEvent = null;
 window.popStateScroll = {};
 window.appName = SkitConfig.MVC.appName;
 
@@ -816,6 +815,7 @@ class Mvc{
 		this.router = new Router;
 		this.pushHistory = new PushHistory;
 		this.pushHistory.init(this);
+		this.changePage = false;
 
 		window.screenId = this._randId();
 
@@ -1004,15 +1004,16 @@ class Mvc{
 
 	triggerPopState(){
 
-		if(listenPopEvent !== null && typeof(listenPopEvent.get()) !== 'undefined'){
+		Debounce(() => {
 
-			listenPopEvent.get();
-		}
-	}
+			if(!this.changePage){
 
-	addPopListener(obj){
+				this.changePage = new Event('changePage');
+			}
 
-		listenPopEvent = obj;
+			document.dispatchEvent(this.changePage);
+
+		}, 10, 'triggerPopState');
 	}
 
 	updateTitle(t){
@@ -1106,8 +1107,6 @@ class PushHistory {
 			var controller = window.location.href.replace(host, '');
 
 			this.app.loadController();
-
-			this.app.triggerPopState();
 
 		}, true);
 
@@ -1216,6 +1215,8 @@ class PushHistory {
 		history.pushState(JSON.stringify({'page': controller}), '', controller);
 
 		this.app.loadController();
+
+		this.app.triggerPopState();
 	}
 
 	goFront (controller){
@@ -2202,13 +2203,26 @@ window.Warning = (obj) => {
 
 		var warn;
 
-		var mask = `<div style="animation-duration: `+timeout+`ms" class="Warning `+color+`" data-id="`+id+`">
-				<div>
-					<div class="WarningTitle">`+title+`</div>
-					<div>`+message+`</div>
-				</div>
-				<div><button class="WarningClose"></button></div>
-			</div>`;
+		if(timeout > -1){
+
+			var mask = `<div style="animation-duration: `+timeout+`ms" class="Warning `+color+`" data-id="`+id+`">
+					<div>
+						<div class="WarningTitle">`+title+`</div>
+						<div>`+message+`</div>
+					</div>
+					<div><button class="WarningClose"></button></div>
+				</div>`;
+
+		}else{
+
+			var mask = `<div class="Warning `+color+`" data-id="`+id+`">
+					<div>
+						<div class="WarningTitle">`+title+`</div>
+						<div>`+message+`</div>
+					</div>
+					<div><button class="WarningClose"></button></div>
+				</div>`;
+		}
 
 		// WARNING EXISTS
 		if(document.getElementById('Warning')){
@@ -2268,18 +2282,21 @@ window.Warning = (obj) => {
 
 				warn.appendChild(warnLine);
 
-				Debounce(() => {
+				if(timeout > -1){
 
-					if(typeof(warnLine) !== 'undefined' && typeof(warnLine.parentElement) !== 'undefined'){
+					Debounce(() => {
 
-						try{
+						if(typeof(warnLine) !== 'undefined' && typeof(warnLine.parentElement) !== 'undefined'){
 
-							warnLine.parentElement.removeChild(warnLine);
-						}catch{
+							try{
 
+								warnLine.parentElement.removeChild(warnLine);
+							}catch{
+
+							}
 						}
-					}
-				}, timeout, id);
+					}, timeout, id);
+				}
 			}
 
 		/* UPDATE WARNING */
